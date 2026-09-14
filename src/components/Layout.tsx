@@ -118,6 +118,9 @@ function Header({ theme, toggleTheme, onCommandPalette }: {
 }) {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const hamburgerRef = useRef<HTMLButtonElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
 
   // Close menu on route change
   useEffect(() => {
@@ -128,12 +131,68 @@ function Header({ theme, toggleTheme, onCommandPalette }: {
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
+      // Focus the close button when menu opens
+      setTimeout(() => closeRef.current?.focus(), 100);
     } else {
       document.body.style.overflow = '';
+      // Restore focus to hamburger when menu closes
+      hamburgerRef.current?.focus();
     }
     return () => {
       document.body.style.overflow = '';
     };
+  }, [mobileMenuOpen]);
+
+  // Handle ESC key
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+    document.addEventListener('keydown', handleEsc);
+    return () => document.removeEventListener('keydown', handleEsc);
+  }, [mobileMenuOpen]);
+
+  // Handle resize - close menu if screen becomes desktop
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768 && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [mobileMenuOpen]);
+
+  // Focus trap
+  useEffect(() => {
+    if (!mobileMenuOpen || !overlayRef.current) return;
+
+    const handleTab = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return;
+
+      const focusableElements = overlayRef.current!.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      if (e.shiftKey) {
+        if (document.activeElement === firstElement) {
+          e.preventDefault();
+          lastElement.focus();
+        }
+      } else {
+        if (document.activeElement === lastElement) {
+          e.preventDefault();
+          firstElement.focus();
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleTab);
+    return () => document.removeEventListener('keydown', handleTab);
   }, [mobileMenuOpen]);
 
   return (
@@ -173,70 +232,95 @@ function Header({ theme, toggleTheme, onCommandPalette }: {
           >
             <span style={{ fontSize: '0.85rem' }}>⌘K</span>
           </button>
+          
+          {/* Hamburger Button */}
           <button
-            className="mobile-menu-btn"
-            onClick={() => setMobileMenuOpen(true)}
-            aria-label="Open menu"
+            ref={hamburgerRef}
+            className={`hamburger ${mobileMenuOpen ? 'active' : ''}`}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-menu"
           >
-            ☰
+            <div className="hamburger-lines">
+              <div className="hamburger-line"></div>
+              <div className="hamburger-line"></div>
+              <div className="hamburger-line"></div>
+            </div>
           </button>
         </div>
       </div>
 
-      {mobileMenuOpen && (
-        <>
-          <div 
-            className="mobile-nav-overlay" 
+      {/* Full-Screen Mobile Menu Overlay */}
+      <div
+        ref={overlayRef}
+        id="mobile-menu"
+        className={`mobile-menu-overlay ${mobileMenuOpen ? 'active' : ''}`}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Mobile navigation"
+      >
+        {/* Top Bar */}
+        <div className="mobile-menu-top">
+          <Link to="/" className="mobile-menu-logo" onClick={() => setMobileMenuOpen(false)}>
+            H<span>.</span>Hakimi
+          </Link>
+          <button
+            ref={closeRef}
+            className="mobile-menu-close"
             onClick={() => setMobileMenuOpen(false)}
-            aria-hidden="true"
-          />
-          <nav className="mobile-nav" role="navigation" aria-label="Mobile navigation">
-            <div className="mobile-nav-handle" aria-hidden="true"></div>
-            <div className="mobile-nav-header">
-              <span className="mobile-nav-title">Navigation</span>
-              <button
-                className="mobile-nav-close"
-                onClick={() => setMobileMenuOpen(false)}
-                aria-label="Close menu"
-              >
-                ✕
-              </button>
-            </div>
-            <div className="mobile-nav-links">
-              {navigation.map(item => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={`nav-link ${location.pathname === item.path ? 'active' : ''}`}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <span className="nav-link-icon" aria-hidden="true">{item.icon}</span>
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-            <div className="mobile-nav-footer">
-              <a 
-                href="https://github.com/Hussain-Hakimi" 
-                className="social-pill" 
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
-                <span aria-hidden="true">⚡</span> GitHub
-              </a>
-              <a 
-                href="https://linkedin.com/in/hussain-hakimi" 
-                className="social-pill" 
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
-                <span aria-hidden="true">💼</span> LinkedIn
-              </a>
-            </div>
-          </nav>
-        </>
-      )}
+            aria-label="Close menu"
+          >
+            ✕
+          </button>
+        </div>
+
+        {/* Navigation Links */}
+        <nav className="mobile-menu-nav">
+          {navigation.map(item => (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`mobile-menu-link ${location.pathname === item.path ? 'active' : ''}`}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
+        {/* Footer with Social Links */}
+        <div className="mobile-menu-footer">
+          <div className="mobile-menu-divider"></div>
+          <div className="mobile-menu-social">
+            <a 
+              href="https://github.com/Hussain-Hakimi" 
+              className="mobile-menu-social-link" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+            >
+              ⚡
+            </a>
+            <a 
+              href="https://linkedin.com/in/hussain-hakimi" 
+              className="mobile-menu-social-link" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+            >
+              💼
+            </a>
+            <a 
+              href="mailto:hussain@example.com" 
+              className="mobile-menu-social-link" 
+              aria-label="Email"
+            >
+              ✉️
+            </a>
+          </div>
+        </div>
+      </div>
     </header>
   );
 }
