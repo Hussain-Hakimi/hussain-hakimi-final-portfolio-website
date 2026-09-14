@@ -55,7 +55,7 @@ function CommandPalette({ isOpen, onClose }: { isOpen: boolean; onClose: () => v
       setSelectedIndex(i => Math.max(i - 1, 0));
     } else if (e.key === 'Enter' && filtered[selectedIndex]) {
       onClose();
-      window.location.hash = filtered[selectedIndex].path;
+      window.location.href = filtered[selectedIndex].path;
     } else if (e.key === 'Escape') {
       onClose();
     }
@@ -83,7 +83,7 @@ function CommandPalette({ isOpen, onClose }: { isOpen: boolean; onClose: () => v
             <div
               key={item.path}
               className={`command-item ${i === selectedIndex ? 'selected' : ''}`}
-              onClick={() => { onClose(); window.location.hash = item.path; }}
+              onClick={() => { onClose(); window.location.href = item.path; }}
               role="option"
               aria-selected={i === selectedIndex}
             >
