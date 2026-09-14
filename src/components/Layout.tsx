@@ -361,7 +361,6 @@ export default function Layout() {
 
   return (
     <>
-      <a href="#main-content" className="skip-link">Skip to content</a>
       <Header theme={theme} toggleTheme={toggle} onCommandPalette={() => setCommandOpen(true)} />
       <main id="main-content" role="main">
         <Outlet />
