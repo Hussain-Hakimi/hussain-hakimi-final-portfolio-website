@@ -192,31 +192,36 @@ function Header({ theme, toggleTheme, onCommandPalette }: {
             aria-hidden="true"
           />
           <nav className="mobile-nav" role="navigation" aria-label="Mobile navigation">
-            <button
-              className="mobile-nav-close"
-              onClick={() => setMobileMenuOpen(false)}
-              aria-label="Close menu"
-            >
-              ✕
-            </button>
-            {navigation.map(item => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`nav-link ${location.pathname === item.path ? 'active' : ''}`}
+            <div className="mobile-nav-handle" aria-hidden="true"></div>
+            <div className="mobile-nav-header">
+              <span className="mobile-nav-title">Navigation</span>
+              <button
+                className="mobile-nav-close"
                 onClick={() => setMobileMenuOpen(false)}
+                aria-label="Close menu"
               >
-                <span aria-hidden="true">{item.icon}</span>
-                {item.label}
-              </Link>
-            ))}
+                ✕
+              </button>
+            </div>
+            <div className="mobile-nav-links">
+              {navigation.map(item => (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={`nav-link ${location.pathname === item.path ? 'active' : ''}`}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <span className="nav-link-icon" aria-hidden="true">{item.icon}</span>
+                  {item.label}
+                </Link>
+              ))}
+            </div>
             <div className="mobile-nav-footer">
               <a 
                 href="https://github.com/Hussain-Hakimi" 
                 className="social-pill" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                style={{ justifyContent: 'center' }}
               >
                 <span aria-hidden="true">⚡</span> GitHub
               </a>
@@ -225,7 +230,6 @@ function Header({ theme, toggleTheme, onCommandPalette }: {
                 className="social-pill" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                style={{ justifyContent: 'center' }}
               >
                 <span aria-hidden="true">💼</span> LinkedIn
               </a>
