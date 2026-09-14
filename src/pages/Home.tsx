@@ -461,32 +461,60 @@ function SkillsSection() {
 // Blog Preview Section
 // ============================================
 function BlogPreviewSection() {
+  // Sort by date, newest first
+  const sortedPosts = [...blogPosts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  
   return (
     <section className="section" aria-labelledby="blog-heading">
       <div className="container">
         <AnimatedSection>
           <span className="section-label">Blog</span>
           <h2 id="blog-heading" className="section-title">Latest articles</h2>
-          <p className="section-subtitle">Thoughts on software engineering, career growth, and web development.</p>
+          <p className="section-subtitle">Thoughts on software engineering, career growth, and web development. Also available in Persian.</p>
         </AnimatedSection>
         
         <div className="blog-grid" style={{ marginTop: '40px' }}>
-          {blogPosts.slice(0, 3).map(post => (
-            <AnimatedSection key={post.slug}>
-              <Link to={`/blog/${post.slug}`} className="blog-card">
-                <div className="blog-card-image" aria-hidden="true">{post.emoji}</div>
-                <div className="blog-card-body">
-                  <div className="blog-card-meta">
-                    <span>{new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
-                    <span>·</span>
-                    <span>{post.readTime}</span>
+          {sortedPosts.slice(0, 3).map(post => {
+            const isRTL = post.language === 'fa';
+            return (
+              <AnimatedSection key={post.slug}>
+                <Link 
+                  to={`/blog/${post.slug}`} 
+                  className="blog-card"
+                  dir={isRTL ? 'rtl' : 'ltr'}
+                  lang={post.language}
+                >
+                  <div className="blog-card-image" aria-hidden="true">{post.emoji}</div>
+                  <div className="blog-card-body">
+                    <div className="blog-card-meta">
+                      <span className="badge" style={{ 
+                        background: isRTL ? '#fef3c7' : '#dbeafe', 
+                        color: isRTL ? '#92400e' : '#1d4ed8',
+                        fontSize: '0.7rem',
+                        padding: '2px 8px'
+                      }}>
+                        {isRTL ? 'فارسی' : 'EN'}
+                      </span>
+                      <span>
+                        {isRTL 
+                          ? new Date(post.date).toLocaleDateString('fa-IR', { month: 'short', day: 'numeric', year: 'numeric' })
+                          : new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+                        }
+                      </span>
+                      <span>·</span>
+                      <span>{post.readTime}</span>
+                    </div>
+                    <h3 className="blog-card-title" style={isRTL ? { fontFamily: "'Vazirmatn', sans-serif" } : {}}>
+                      {post.title}
+                    </h3>
+                    <p className="blog-card-excerpt" style={isRTL ? { fontFamily: "'Vazirmatn', sans-serif" } : {}}>
+                      {post.excerpt}
+                    </p>
                   </div>
-                  <h3 className="blog-card-title">{post.title}</h3>
-                  <p className="blog-card-excerpt">{post.excerpt}</p>
-                </div>
-              </Link>
-            </AnimatedSection>
-          ))}
+                </Link>
+              </AnimatedSection>
+            );
+          })}
         </div>
         
         <AnimatedSection>

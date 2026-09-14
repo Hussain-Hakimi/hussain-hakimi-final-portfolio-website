@@ -80,6 +80,7 @@ export const blogPosts = [
     title: 'Why I Chose Software Engineering Over Business',
     date: '2025-01-15',
     readTime: '5 min read',
+    language: 'en' as const,
     tags: ['Career', 'Personal'],
     excerpt: 'The story of how I pivoted from Business Administration to Software Engineering, and why it was the best decision I ever made.',
     emoji: '🚀',
@@ -121,6 +122,7 @@ If you're considering a similar pivot, my advice is simple: start building. The 
     title: 'Understanding Big O Notation: A Beginner\'s Guide',
     date: '2025-02-20',
     readTime: '7 min read',
+    language: 'en' as const,
     tags: ['Algorithms', 'Computer Science'],
     excerpt: 'A clear, practical guide to understanding algorithm complexity and why Big O notation matters for every software engineer.',
     emoji: '📐',
@@ -182,6 +184,7 @@ Big O isn't about being perfect — it's about being aware. Understanding algori
     title: 'Building a Blazing-Fast Portfolio with Astro',
     date: '2025-03-10',
     readTime: '6 min read',
+    language: 'en' as const,
     tags: ['Web Development', 'Tutorial'],
     excerpt: 'How I built this portfolio using Astro to achieve perfect Lighthouse scores while maintaining a beautiful, interactive design.',
     emoji: '⚡',
@@ -243,6 +246,102 @@ Using Intersection Observer to fade sections in as they enter the viewport. Resp
 ## Final Thoughts
 
 Astro is perfect for content-focused websites like portfolios and blogs. If you want a fast, beautiful site without the overhead of a full SPA framework, give it a try.
+    `,
+  },
+  {
+    slug: 'masir-e-man-be-barname-nevisi',
+    title: 'مسیر من به سمت برنامه‌نویسی',
+    date: '2025-04-05',
+    readTime: '۶ دقیقه مطالعه',
+    language: 'fa' as const,
+    tags: ['مسیر شغلی', 'تجربه شخصی'],
+    excerpt: 'داستان تغییر مسیر من از رشته مدیریت بازرگانی به مهندسی نرم‌افزار و اینکه چرا این بهترین تصمیم زندگی‌ام بود.',
+    emoji: '🌟',
+    content: `
+## شروع مسیر
+
+وقتی برای اولین بار وارد دانشگاه شدم، رشته مدیریت بازرگانی را انتخاب کردم. این انتخاب امن به نظر می‌رسید — مدرکی که ثبات و مسیر شغلی مشخصی را وعده می‌داد. اما چیزی درست حس نمی‌شد.
+
+## جرقه اولیه
+
+در ترم اول، به طور تصادفی با یک آموزش توسعه وب آشنا شدم. در عرض چند ساعت، مجذوب شدم. توانایی تایپ خطوط کد و دیدن فوری نتیجه بصری، شگفت‌انگیز بود. تا ساعت ۳ صبح بیدار ماندم و اولین صفحه وبم را ساختم.
+
+آن شب همه چیز را تغییر داد.
+
+## تصمیم بزرگ
+
+پس از ماه‌ها خودآموزی، ساخت پروژه‌های کوچک و تأمل عمیق، تصمیم به تغییر مسیر به مهندسی نرم‌افزار گرفتم. آسان نبود — باید خانواده‌ام را قانع می‌کردم و کاملاً از منطقه امنم خارج می‌شدم.
+
+اما با اطمینان می‌دانستم: این همان چیزی است که برای آن ساخته شده‌ام.
+
+## درس‌هایی که آموختم
+
+- **عشق مهم‌تر از شهرت است.** شغلی که دوستش دارید همیشه بهتر از شغلی عمل می‌کند که به آن راضی شده‌اید.
+- **هیچ‌وقت برای تغییر دیر نیست.** چه سال اول باشد چه سال دهم، می‌توانید مسیرتان را عوض کنید.
+- **خودآموزی یک ابرقدرت است.** توانایی یادگیری مهارت‌های جدید در دنیای تکنولوژی بی‌ارزش نیست.
+- **جامعه مهم است.** ارتباط با سایر توسعه‌دهندگان رشد من را به شکل چشمگیری تسریع کرد.
+
+## نگاه به آینده
+
+امروز، من دانشجوی مهندسی نرم‌افزار در UET لاهور هستم. پس‌زمینه تجاری که کسب کردم هدر نرفته — به من دیدگاه منحصر به فردی درباره تفکر محصول و نیازهای کاربر می‌دهد.
+
+اگر شما هم به تغییر مسیر فکر می‌کنید، توصیه من ساده است: شروع به ساختن کنید. بهترین راه برای فهمیدن اینکه چیزی برای شما مناسب است یا نه، امتحان کردن آن است.
+    `,
+  },
+  {
+    slug: 'sakht-e-web-sayit-sari',
+    title: 'چگونه یک وب‌سایت سریع و زیبا بسازیم',
+    date: '2025-04-20',
+    readTime: '۸ دقیقه مطالعه',
+    language: 'fa' as const,
+    tags: ['توسعه وب', 'عملکرد', 'آموزش'],
+    excerpt: 'نکات کلیدی برای ساخت وب‌سایت‌هایی که هم زیبا هستند و هم عملکرد عالی دارند. از بهینه‌سازی تصاویر تا کاهش حجم جاوااسکریپت.',
+    emoji: '⚡',
+    content: `
+## چرا عملکرد مهم است؟
+
+در دنیای امروز، کاربران صبر کمی دارند. اگر وب‌سایت شما در کمتر از ۳ ثانیه بارگذاری نشود، بیشتر بازدیدکنندگان را از دست می‌دهید. عملکرد خوب نه تنها تجربه کاربری را بهبود می‌بخشد، بلکه رتبه سایت شما را در موتورهای جستجو نیز بالا می‌برد.
+
+## اصول کلیدی
+
+### بهینه‌سازی تصاویر
+
+تصاویر معمولاً بزرگ‌ترین بخش حجم صفحه هستند. چند نکته مهم:
+
+- از فرمت‌های مدرن مثل WebP و AVIF استفاده کنید
+- تصاویر را فشرده کنید بدون اینکه کیفیت به شکل محسوسی کاهش یابد
+- از lazy loading برای تصاویر پایین صفحه استفاده کنید
+- اندازه تصاویر را متناسب با نمایشگر انتخاب کنید
+
+### کاهش حجم جاوااسکریپت
+
+جاوااسکریپت سنگین می‌تواند عملکرد را به شدت کاهش دهد:
+
+- فقط کدهای ضروری را بارگذاری کنید
+- از tree-shaking برای حذف کدهای استفاده نشده بهره ببرید
+- کتابخانه‌های سنگین را با جایگزین‌های سبک‌تر عوض کنید
+- از code splitting استفاده کنید
+
+### CSS کارآمد
+
+- از CSS Custom Properties برای تم‌بندی استفاده کنید
+- انیمیشن‌ها را به transform و opacity محدود کنید
+- از will-change با احتیاط استفاده کنید
+- استایل‌های غیرضروری را حذف کنید
+
+## ابزارهای اندازه‌گیری
+
+برای سنجش عملکرد وب‌سایت خود از این ابزارها استفاده کنید:
+
+- **Lighthouse** — ابزار گوگل برای ارزیابی جامع
+- **WebPageTest** — تست عملکرد از مکان‌های مختلف
+- **Chrome DevTools** — تحلیل دقیق در مرورگر
+
+## نتیجه‌گیری
+
+ساخت یک وب‌سایت سریع نیاز به تلاش مداوم دارد، اما نتیجه آن ارزشمند است. کاربران خوشحال‌تر، نرخ تبدیل بالاتر، و رتبه بهتر در جستجو — همه اینها از عملکرد خوب ناشی می‌شود.
+
+هرگز عملکرد را فدای زیبایی نکنید. بهترین وب‌سایت‌ها ترکیبی از هر دو هستند.
     `,
   },
 ];

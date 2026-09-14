@@ -2,7 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import { blogPosts } from '../data';
 
 // Simple markdown-like renderer
-function renderContent(content: string): string {
+function renderContent(content: string, isRTL: boolean): string {
   const lines = content.trim().split('\n');
   const htmlParts: string[] = [];
   let inList = false;
@@ -79,6 +79,22 @@ function extractHeadings(content: string): { id: string; text: string; level: nu
   return headings;
 }
 
+// Auto-suggest related posts based on shared tags
+function getRelatedPosts(currentSlug: string, currentTags: string[], currentLang: string, limit = 3) {
+  return blogPosts
+    .filter(p => p.slug !== currentSlug)
+    .map(p => {
+      // Score based on shared tags and same language
+      const sharedTags = p.tags.filter(t => currentTags.includes(t)).length;
+      const sameLang = p.language === currentLang ? 2 : 0;
+      const score = sharedTags + sameLang;
+      return { ...p, score };
+    })
+    .filter(p => p.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit);
+}
+
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
   const postIndex = blogPosts.findIndex(p => p.slug === slug);
@@ -95,8 +111,10 @@ export default function BlogPost() {
     );
   }
 
+  const isRTL = post.language === 'fa';
   const headings = extractHeadings(post.content);
-  const htmlContent = renderContent(post.content);
+  const htmlContent = renderContent(post.content, isRTL);
+  const relatedPosts = getRelatedPosts(post.slug, post.tags, post.language);
 
   // Prev/Next navigation
   const sortedPosts = [...blogPosts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
@@ -105,19 +123,37 @@ export default function BlogPost() {
   const nextPost = currentSortedIndex > 0 ? sortedPosts[currentSortedIndex - 1] : null;
 
   return (
-    <article className="blog-post">
-      <Link to="/blog" className="blog-post-back">← Back to Blog</Link>
+    <article className={`blog-post ${isRTL ? 'rtl' : ''}`} dir={isRTL ? 'rtl' : 'ltr'} lang={post.language}>
+      <Link to="/blog" className="blog-post-back">
+        {isRTL ? '→ بازگشت به بلاگ' : '← Back to Blog'}
+      </Link>
       
       <header className="blog-post-header">
+        <div style={{ display: 'flex', gap: '8px', marginBottom: '16px', alignItems: 'center' }}>
+          {isRTL && (
+            <span className="badge" style={{ background: '#fef3c7', color: '#92400e', fontSize: '0.75rem' }}>
+              فارسی
+            </span>
+          )}
+          {!isRTL && (
+            <span className="badge" style={{ background: '#dbeafe', color: '#1d4ed8', fontSize: '0.75rem' }}>
+              English
+            </span>
+          )}
+        </div>
+        
         <h1 className="blog-post-title">{post.title}</h1>
         <div className="blog-post-meta">
           <time dateTime={post.date}>
-            {new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+            {isRTL 
+              ? new Date(post.date).toLocaleDateString('fa-IR', { month: 'long', day: 'numeric', year: 'numeric' })
+              : new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+            }
           </time>
           <span>·</span>
           <span>{post.readTime}</span>
           <span>·</span>
-          <span>Hussain Hakimi</span>
+          <span>{isRTL ? 'حسین حکیمی' : 'Hussain Hakimi'}</span>
         </div>
         <div className="blog-post-tags">
           {post.tags.map(tag => (
@@ -127,8 +163,8 @@ export default function BlogPost() {
       </header>
 
       {headings.length > 0 && (
-        <nav className="toc" aria-label="Table of contents">
-          <div className="toc-title">Table of Contents</div>
+        <nav className="toc" aria-label={isRTL ? 'فهرست مطالب' : 'Table of contents'}>
+          <div className="toc-title">{isRTL ? 'فهرست مطالب' : 'Table of Contents'}</div>
           <div className="toc-list">
             {headings.map((heading, i) => (
               <a
@@ -148,16 +184,36 @@ export default function BlogPost() {
         dangerouslySetInnerHTML={{ __html: htmlContent }}
       />
 
+      {/* Related Posts / Auto-Suggestions */}
+      {relatedPosts.length > 0 && (
+        <section className="related-posts" aria-label={isRTL ? 'مقالات مرتبط' : 'Related articles'}>
+          <h2 className="related-posts-title">
+            {isRTL ? 'مقالات پیشنهادی' : 'Suggested for you'}
+          </h2>
+          <div className="related-posts-grid">
+            {relatedPosts.map(rp => (
+              <Link key={rp.slug} to={`/blog/${rp.slug}`} className="related-post-card">
+                <div className="related-post-emoji">{rp.emoji}</div>
+                <div className="related-post-info">
+                  <h3 className="related-post-card-title">{rp.title}</h3>
+                  <span className="related-post-meta">{rp.readTime}</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
       <nav className="post-nav" aria-label="Post navigation">
         {prevPost ? (
           <Link to={`/blog/${prevPost.slug}`} className="post-nav-link">
-            <div className="post-nav-label">← Previous</div>
+            <div className="post-nav-label">{isRTL ? '→ قبلی' : '← Previous'}</div>
             <div className="post-nav-title">{prevPost.title}</div>
           </Link>
         ) : <div />}
         {nextPost ? (
-          <Link to={`/blog/${nextPost.slug}`} className="post-nav-link" style={{ textAlign: 'right' }}>
-            <div className="post-nav-label">Next →</div>
+          <Link to={`/blog/${nextPost.slug}`} className="post-nav-link" style={{ textAlign: isRTL ? 'left' : 'right' }}>
+            <div className="post-nav-label">{isRTL ? 'بعدی ←' : 'Next →'}</div>
             <div className="post-nav-title">{nextPost.title}</div>
           </Link>
         ) : <div />}
