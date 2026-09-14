@@ -119,6 +119,23 @@ function Header({ theme, toggleTheme, onCommandPalette }: {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // Close menu on route change
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
+
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
   return (
     <header className="header" role="banner">
       <div className="header-inner">
@@ -158,28 +175,63 @@ function Header({ theme, toggleTheme, onCommandPalette }: {
           </button>
           <button
             className="mobile-menu-btn"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
+            onClick={() => setMobileMenuOpen(true)}
+            aria-label="Open menu"
             aria-expanded={mobileMenuOpen}
           >
-            {mobileMenuOpen ? '✕' : '☰'}
+            ☰
           </button>
         </div>
       </div>
 
       {mobileMenuOpen && (
-        <nav className="mobile-nav" role="navigation" aria-label="Mobile navigation">
-          {navigation.map(item => (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={`nav-link ${location.pathname === item.path ? 'active' : ''}`}
+        <>
+          <div 
+            className="mobile-nav-overlay" 
+            onClick={() => setMobileMenuOpen(false)}
+            aria-hidden="true"
+          />
+          <nav className="mobile-nav" role="navigation" aria-label="Mobile navigation">
+            <button
+              className="mobile-nav-close"
               onClick={() => setMobileMenuOpen(false)}
+              aria-label="Close menu"
             >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+              ✕
+            </button>
+            {navigation.map(item => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={`nav-link ${location.pathname === item.path ? 'active' : ''}`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <span aria-hidden="true">{item.icon}</span>
+                {item.label}
+              </Link>
+            ))}
+            <div className="mobile-nav-footer">
+              <a 
+                href="https://github.com/Hussain-Hakimi" 
+                className="social-pill" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{ justifyContent: 'center' }}
+              >
+                <span aria-hidden="true">⚡</span> GitHub
+              </a>
+              <a 
+                href="https://linkedin.com/in/hussain-hakimi" 
+                className="social-pill" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{ justifyContent: 'center' }}
+              >
+                <span aria-hidden="true">💼</span> LinkedIn
+              </a>
+            </div>
+          </nav>
+        </>
       )}
     </header>
   );

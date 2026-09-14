@@ -205,16 +205,16 @@ function HeroSection() {
               </a>
             </div>
             
-            <div className="hero-stats">
-              <div className="hero-stat">
+            <div className="hero-stats" role="list">
+              <div className="hero-stat" role="listitem">
                 <div className="hero-stat-value">3</div>
                 <div className="hero-stat-label">Featured Projects</div>
               </div>
-              <div className="hero-stat">
+              <div className="hero-stat" role="listitem">
                 <div className="hero-stat-value">6+</div>
                 <div className="hero-stat-label">Core Languages</div>
               </div>
-              <div className="hero-stat">
+              <div className="hero-stat" role="listitem">
                 <div className="hero-stat-value">2025–29</div>
                 <div className="hero-stat-label">Study Track</div>
               </div>
