@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import Layout from './components/Layout';
 import Home from './pages/Home';
@@ -20,7 +20,7 @@ function ScrollToTop() {
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Layout />}>
@@ -34,6 +34,6 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
