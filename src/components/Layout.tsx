@@ -1,5 +1,6 @@
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { useState, useEffect, useCallback, useRef } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import { navigation, siteConfig } from '../data';
 
 // ============================================
@@ -367,6 +368,7 @@ export default function Layout() {
       </main>
       <Footer />
       <CommandPalette isOpen={commandOpen} onClose={() => setCommandOpen(false)} />
+      <Analytics />
     </>
   );
 }
