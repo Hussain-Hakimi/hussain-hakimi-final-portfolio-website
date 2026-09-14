@@ -1,0 +1,28 @@
+{
+  "name": "Hussain Hakimi — Software Engineer Portfolio",
+  "short_name": "H. Hakimi",
+  "description": "Software Engineering student at UET Lahore. Frontend developer passionate about building beautiful, performant web experiences.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#4f46e5",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon/favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "productivity", "developer tools"],
+  "lang": "en",
+  "dir": "ltr",
+  "scope": "https://hussain-hakimi.vercel.app/"
+}

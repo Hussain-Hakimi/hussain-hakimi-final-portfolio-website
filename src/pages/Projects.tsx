@@ -106,6 +106,9 @@ export default function Projects() {
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="container">
           <AnimatedSection>
+            <p style={{ textAlign: 'center', marginBottom: '2rem', color: 'var(--text-secondary)' }}>
+              Interested in how I built these? Read my <Link to="/blog" style={{ color: 'var(--accent)', fontWeight: 600 }}>development tutorials</Link> or <Link to="/about" style={{ color: 'var(--accent)', fontWeight: 600 }}>learn more about me</Link>.
+            </p>
             <div className="filter-buttons" role="group" aria-label="Filter projects">
               {['all', 'frontend', 'analytics'].map(cat => (
                 <button

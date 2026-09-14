@@ -2,6 +2,7 @@ import { Outlet, Link, useLocation } from 'react-router-dom';
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { navigation, siteConfig } from '../data';
+import useSEO from '../hooks/useSEO';
 
 // ============================================
 // Theme Hook
@@ -347,6 +348,9 @@ function Footer() {
 export default function Layout() {
   const { theme, toggle } = useTheme();
   const [commandOpen, setCommandOpen] = useState(false);
+  
+  // Initialize SEO - updates meta tags based on current route
+  useSEO();
 
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
