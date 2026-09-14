@@ -249,7 +249,7 @@ function HeroSection() {
 // ============================================
 function AboutSection() {
   return (
-    <section className="section" aria-labelledby="about-heading">
+    <section className="section section-alt" aria-labelledby="about-heading">
       <div className="container">
         <AnimatedSection>
           <span className="section-label">About me</span>
@@ -317,7 +317,7 @@ function ProjectsSection({ showAll = false }: { showAll?: boolean }) {
   const displayProjects = showAll ? filtered : filtered.slice(0, 3);
 
   return (
-    <section className="section" style={{ background: 'var(--bg-section)' }} aria-labelledby="projects-heading">
+    <section className="section" aria-labelledby="projects-heading">
       <div className="container">
         <AnimatedSection>
           <span className="section-label">Portfolio</span>
@@ -349,12 +349,8 @@ function ProjectsSection({ showAll = false }: { showAll?: boolean }) {
                 </div>
                 <div className="project-card-body">
                   <div className="project-card-badges">
-                    <span className={`badge badge-${project.category}`}>
-                      {project.category}
-                    </span>
-                    <span className="badge" style={{ background: 'var(--accent-light)', color: 'var(--accent)' }}>
-                      {project.year}
-                    </span>
+                    <span className="badge badge-live">● Live</span>
+                    <span className="badge badge-category">{project.category}</span>
                   </div>
                   <h3 className="project-card-title">{project.title}</h3>
                   <p className="project-card-desc">{project.description}</p>
@@ -363,20 +359,22 @@ function ProjectsSection({ showAll = false }: { showAll?: boolean }) {
                       <span key={t} className="tag">{t}</span>
                     ))}
                   </div>
+                  <div className="project-card-divider"></div>
                   <div className="project-card-actions">
-                    <a href={project.liveUrl} className="btn btn-ghost btn-sm" target="_blank" rel="noopener noreferrer">
+                    <a href={project.liveUrl} className="project-card-primary-action" target="_blank" rel="noopener noreferrer">
                       Live Demo →
                     </a>
-                    <a href={project.repoUrl} className="btn btn-ghost btn-sm" target="_blank" rel="noopener noreferrer">
-                      Repo
-                    </a>
-                    <button 
-                      className="btn btn-ghost btn-sm" 
-                      onClick={() => setModalProject(project)}
-                      style={{ color: 'var(--accent)' }}
-                    >
-                      Case Study
-                    </button>
+                    <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                      <a href={project.repoUrl} className="project-card-secondary-action" target="_blank" rel="noopener noreferrer">
+                        Repo
+                      </a>
+                      <button 
+                        className="project-card-case-study-btn" 
+                        onClick={() => setModalProject(project)}
+                      >
+                        📖 Case
+                      </button>
+                    </div>
                   </div>
                 </div>
               </article>
@@ -407,7 +405,7 @@ function ProjectsSection({ showAll = false }: { showAll?: boolean }) {
 // ============================================
 function ExperienceSection() {
   return (
-    <section className="section" aria-labelledby="experience-heading">
+    <section className="section section-alt" aria-labelledby="experience-heading">
       <div className="container">
         <AnimatedSection>
           <span className="section-label">Experience</span>
@@ -437,7 +435,7 @@ function ExperienceSection() {
 // ============================================
 function SkillsSection() {
   return (
-    <section className="section" style={{ background: 'var(--bg-section)' }} aria-labelledby="skills-heading">
+    <section className="section" aria-labelledby="skills-heading">
       <div className="container">
         <AnimatedSection>
           <span className="section-label">Skills</span>
@@ -465,7 +463,7 @@ function BlogPreviewSection() {
   const sortedPosts = [...blogPosts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   
   return (
-    <section className="section" aria-labelledby="blog-heading">
+    <section className="section section-alt" aria-labelledby="blog-heading">
       <div className="container">
         <AnimatedSection>
           <span className="section-label">Blog</span>

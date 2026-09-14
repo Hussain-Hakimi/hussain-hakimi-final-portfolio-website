@@ -105,7 +105,7 @@ export default function About() {
         </div>
       </section>
 
-      <section className="section" style={{ background: 'var(--bg-section)' }}>
+      <section className="section section-alt">
         <div className="container">
           <AnimatedSection>
             <span className="section-label">Experience</span>
@@ -141,7 +141,7 @@ export default function About() {
         </div>
       </section>
 
-      <section className="section" style={{ background: 'var(--bg-section)' }}>
+      <section className="section section-alt">
         <div className="container" style={{ textAlign: 'center' }}>
           <AnimatedSection>
             <h2 className="section-title">Want to work together?</h2>

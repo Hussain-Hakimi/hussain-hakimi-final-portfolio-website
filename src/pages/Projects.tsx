@@ -127,20 +127,30 @@ export default function Projects() {
                   <div className="project-card-image" aria-hidden="true">{project.emoji}</div>
                   <div className="project-card-body">
                     <div className="project-card-badges">
-                      <span className={`badge badge-${project.category}`}>{project.category}</span>
-                      <span className="badge" style={{ background: 'var(--accent-light)', color: 'var(--accent)' }}>{project.year}</span>
+                      <span className="badge badge-live">● Live</span>
+                      <span className="badge badge-category">{project.category}</span>
                     </div>
                     <h3 className="project-card-title">{project.title}</h3>
                     <p className="project-card-desc">{project.description}</p>
                     <div className="project-card-tags">
                       {project.tech.map(t => <span key={t} className="tag">{t}</span>)}
                     </div>
+                    <div className="project-card-divider"></div>
                     <div className="project-card-actions">
-                      <a href={project.liveUrl} className="btn btn-ghost btn-sm" target="_blank" rel="noopener noreferrer">Live Demo →</a>
-                      <a href={project.repoUrl} className="btn btn-ghost btn-sm" target="_blank" rel="noopener noreferrer">Repo</a>
-                      <button className="btn btn-ghost btn-sm" onClick={() => setModalProject(project)} style={{ color: 'var(--accent)' }}>
-                        Case Study
-                      </button>
+                      <a href={project.liveUrl} className="project-card-primary-action" target="_blank" rel="noopener noreferrer">
+                        Live Demo →
+                      </a>
+                      <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                        <a href={project.repoUrl} className="project-card-secondary-action" target="_blank" rel="noopener noreferrer">
+                          Repo
+                        </a>
+                        <button 
+                          className="project-card-case-study-btn" 
+                          onClick={() => setModalProject(project)}
+                        >
+                          📖 Case
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </article>
