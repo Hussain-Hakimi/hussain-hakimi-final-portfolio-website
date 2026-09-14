@@ -1,4 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
+import { useEffect } from 'react';
 import { blogPosts } from '../data';
 
 // Simple markdown-like renderer
@@ -99,6 +100,44 @@ export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
   const postIndex = blogPosts.findIndex(p => p.slug === slug);
   const post = blogPosts[postIndex];
+
+  // Inject BlogPosting JSON-LD schema
+  useEffect(() => {
+    if (!post) return;
+    
+    const schema = {
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: post.title,
+      description: post.excerpt,
+      author: {
+        '@type': 'Person',
+        name: 'Hussain Hakimi',
+        url: 'https://hussain-hakimi.vercel.app/#/about',
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'Hussain Hakimi Portfolio',
+      },
+      datePublished: post.date,
+      dateModified: post.date,
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': `https://hussain-hakimi.vercel.app/#/blog/${post.slug}`,
+      },
+      keywords: post.tags.join(', '),
+      inLanguage: post.language === 'fa' ? 'fa' : 'en',
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.textContent = JSON.stringify(schema);
+    document.head.appendChild(script);
+
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, [post]);
 
   if (!post) {
     return (

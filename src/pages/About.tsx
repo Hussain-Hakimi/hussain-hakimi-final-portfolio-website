@@ -146,7 +146,7 @@ export default function About() {
           <AnimatedSection>
             <h2 className="section-title">Want to work together?</h2>
             <p className="section-subtitle" style={{ margin: '0 auto 32px' }}>
-              I'm always open to discussing new opportunities and interesting projects.
+              I'm always open to discussing new opportunities and interesting projects. Check out my <Link to="/projects" style={{ color: 'var(--accent)', fontWeight: 600 }}>frontend projects</Link> or read my <Link to="/blog" style={{ color: 'var(--accent)', fontWeight: 600 }}>latest articles</Link> on software engineering.
             </p>
             <Link to="/contact" className="btn btn-primary">Get in Touch →</Link>
           </AnimatedSection>
