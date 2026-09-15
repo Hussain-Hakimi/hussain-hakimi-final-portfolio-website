@@ -1,0 +1,50 @@
+import { useEffect, useRef } from 'react';
+import { Github, Linkedin, Mail, X } from 'lucide-react';
+import { Link, NavLink } from 'react-router-dom';
+import { navigation, siteConfig } from '../../data';
+
+interface MobileMenuProps { isOpen: boolean; onClose: () => void; }
+
+export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+  const closeButton = useRef<HTMLButtonElement>(null);
+  const panel = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    document.body.style.overflow = 'hidden';
+    const timeout = window.setTimeout(() => closeButton.current?.focus(), 50);
+    const onKeydown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose();
+      if (event.key !== 'Tab' || !panel.current) return;
+      const focusable = panel.current.querySelectorAll<HTMLElement>('button, a[href]');
+      const first = focusable[0]; const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    };
+    document.addEventListener('keydown', onKeydown);
+    return () => { window.clearTimeout(timeout); document.body.style.overflow = ''; document.removeEventListener('keydown', onKeydown); };
+  }, [isOpen, onClose]);
+
+  return (
+    <div className={`mobile-navigation ${isOpen ? 'is-open' : ''}`} aria-hidden={!isOpen}>
+      <button className="mobile-navigation-backdrop" aria-label="Close navigation" tabIndex={isOpen ? 0 : -1} onClick={onClose} />
+      <aside ref={panel} className="mobile-navigation-panel" aria-label="Mobile navigation" aria-modal="true" role="dialog">
+        <div className="mobile-navigation-heading">
+          <Link to="/" onClick={onClose} className="mobile-navigation-brand">H<span>.</span>Hakimi</Link>
+          <button ref={closeButton} className="header-icon-button" onClick={onClose} tabIndex={isOpen ? 0 : -1} aria-label="Close navigation"><X size={21} /></button>
+        </div>
+        <p className="mobile-navigation-kicker">Navigate</p>
+        <nav className="mobile-navigation-links">
+          {navigation.map((item, index) => <NavLink key={item.path} to={item.path} onClick={onClose} tabIndex={isOpen ? 0 : -1} className={({ isActive }) => `mobile-navigation-link ${isActive ? 'active' : ''}`}>
+            <span className="mobile-navigation-index">0{index + 1}</span>{item.label}<span aria-hidden="true">↗</span>
+          </NavLink>)}
+        </nav>
+        <div className="mobile-navigation-footer">
+          <a href={siteConfig.github} target="_blank" rel="noreferrer" tabIndex={isOpen ? 0 : -1} aria-label="GitHub"><Github size={19} /></a>
+          <a href={siteConfig.linkedin} target="_blank" rel="noreferrer" tabIndex={isOpen ? 0 : -1} aria-label="LinkedIn"><Linkedin size={19} /></a>
+          <a href={`mailto:${siteConfig.email}`} tabIndex={isOpen ? 0 : -1} aria-label="Email"><Mail size={19} /></a>
+        </div>
+      </aside>
+    </div>
+  );
+}
