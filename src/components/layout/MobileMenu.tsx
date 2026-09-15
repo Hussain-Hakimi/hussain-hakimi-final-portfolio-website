@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Github, Linkedin, Mail, X } from 'lucide-react';
+import { ArrowUpRight, Github, Linkedin, Mail, X } from 'lucide-react';
 import { Link, NavLink } from 'react-router-dom';
 import { navigation, siteConfig } from '../../data';
 
@@ -28,21 +28,35 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   return (
     <div className={`mobile-navigation ${isOpen ? 'is-open' : ''}`} aria-hidden={!isOpen}>
       <button className="mobile-navigation-backdrop" aria-label="Close navigation" tabIndex={isOpen ? 0 : -1} onClick={onClose} />
-      <aside ref={panel} className="mobile-navigation-panel" aria-label="Mobile navigation" aria-modal="true" role="dialog">
-        <div className="mobile-navigation-heading">
-          <Link to="/" onClick={onClose} className="mobile-navigation-brand">H<span>.</span>Hakimi</Link>
-          <button ref={closeButton} className="header-icon-button" onClick={onClose} tabIndex={isOpen ? 0 : -1} aria-label="Close navigation"><X size={21} /></button>
+      <aside ref={panel} id="mobile-navigation-dialog" className="mobile-navigation-panel" aria-label="Mobile navigation" aria-modal="true" role="dialog">
+        <div className="mobile-navigation-topline">
+          <span className="mobile-navigation-eyebrow">Menu / 2026</span>
+          <button ref={closeButton} className="mobile-navigation-close" onClick={onClose} tabIndex={isOpen ? 0 : -1} aria-label="Close navigation"><X size={20} /></button>
         </div>
-        <p className="mobile-navigation-kicker">Navigate</p>
-        <nav className="mobile-navigation-links">
+
+        <div className="mobile-navigation-intro">
+          <Link to="/" onClick={onClose} className="mobile-navigation-brand">H<span>.</span>Hakimi</Link>
+          <p>Designing dependable digital experiences and building useful things for the web.</p>
+        </div>
+
+        <nav className="mobile-navigation-links" aria-label="Mobile primary navigation">
           {navigation.map((item, index) => <NavLink key={item.path} to={item.path} onClick={onClose} tabIndex={isOpen ? 0 : -1} className={({ isActive }) => `mobile-navigation-link ${isActive ? 'active' : ''}`}>
-            <span className="mobile-navigation-index">0{index + 1}</span>{item.label}<span aria-hidden="true">↗</span>
+            <span className="mobile-navigation-index">0{index + 1}</span>
+            <span className="mobile-navigation-label">{item.label}</span>
+            <ArrowUpRight className="mobile-navigation-arrow" size={20} aria-hidden="true" />
           </NavLink>)}
         </nav>
+
         <div className="mobile-navigation-footer">
-          <a href={siteConfig.github} target="_blank" rel="noreferrer" tabIndex={isOpen ? 0 : -1} aria-label="GitHub"><Github size={19} /></a>
-          <a href={siteConfig.linkedin} target="_blank" rel="noreferrer" tabIndex={isOpen ? 0 : -1} aria-label="LinkedIn"><Linkedin size={19} /></a>
-          <a href={`mailto:${siteConfig.email}`} tabIndex={isOpen ? 0 : -1} aria-label="Email"><Mail size={19} /></a>
+          <div>
+            <span className="mobile-navigation-footer-label">Elsewhere</span>
+            <div className="mobile-navigation-socials">
+              <a href={siteConfig.github} target="_blank" rel="noreferrer" tabIndex={isOpen ? 0 : -1} aria-label="GitHub"><Github size={18} /></a>
+              <a href={siteConfig.linkedin} target="_blank" rel="noreferrer" tabIndex={isOpen ? 0 : -1} aria-label="LinkedIn"><Linkedin size={18} /></a>
+              <a href={`mailto:${siteConfig.email}`} tabIndex={isOpen ? 0 : -1} aria-label="Email"><Mail size={18} /></a>
+            </div>
+          </div>
+          <span className="mobile-navigation-availability"><span />Available for select work</span>
         </div>
       </aside>
     </div>
