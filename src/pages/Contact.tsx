@@ -39,7 +39,6 @@ export default function Contact() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
-    console.log('Form submitted:', formData);
     setSubmitted(true);
     setFormData({ name: '', email: '', message: '' });
     setErrors({});

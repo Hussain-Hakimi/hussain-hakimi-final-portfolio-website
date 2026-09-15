@@ -1,80 +1,120 @@
 import { useParams, Link } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, type ReactNode } from 'react';
 import { blogPosts } from '../data';
 
-// Simple markdown-like renderer
-function renderContent(content: string, isRTL: boolean): string {
+function renderInlineText(text: string): ReactNode[] {
+  const segments: ReactNode[] = [];
+  const pattern = /(`.*?`)|\*\*(.+?)\*\*|\*(.+?)\*|_(.+?)_/g;
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = pattern.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      segments.push(text.slice(lastIndex, match.index));
+    }
+
+    const [fullMatch, codeMatch, boldMatch, italicMatch, underscoreMatch] = match;
+
+    if (codeMatch) {
+      segments.push(<code key={`code-${match.index}`}>{codeMatch.slice(1, -1)}</code>);
+    } else if (boldMatch) {
+      segments.push(<strong key={`bold-${match.index}`}>{boldMatch}</strong>);
+    } else if (italicMatch) {
+      segments.push(<em key={`italic-${match.index}`}>{italicMatch}</em>);
+    } else if (underscoreMatch) {
+      segments.push(<em key={`underscore-${match.index}`}>{underscoreMatch}</em>);
+    } else {
+      segments.push(fullMatch);
+    }
+
+    lastIndex = match.index + fullMatch.length;
+  }
+
+  if (lastIndex < text.length) {
+    segments.push(text.slice(lastIndex));
+  }
+
+  return segments;
+}
+
+function renderContent(content: string): ReactNode[] {
   const lines = content.trim().split('\n');
-  const htmlParts: string[] = [];
+  const nodes: ReactNode[] = [];
   let inList = false;
-  
-  for (let i = 0; i < lines.length; i++) {
-    let line = lines[i];
-    
-    // Skip empty lines
+  let listKey = 0;
+
+  for (let i = 0; i < lines.length; i += 1) {
+    const line = lines[i];
+
     if (line.trim() === '') {
       if (inList) {
-        htmlParts.push('</ul>');
+        nodes.push(<ul key={`list-end-${i}`}></ul>);
         inList = false;
       }
       continue;
     }
-    
-    // Headers
+
     if (line.startsWith('### ')) {
-      if (inList) { htmlParts.push('</ul>'); inList = false; }
-      const text = line.replace('### ', '');
-      htmlParts.push(`<h3>${text}</h3>`);
+      if (inList) {
+        nodes.push(<ul key={`list-end-${i}`}></ul>);
+        inList = false;
+      }
+      nodes.push(<h3 key={`h3-${i}`}>{line.replace('### ', '')}</h3>);
       continue;
     }
+
     if (line.startsWith('## ')) {
-      if (inList) { htmlParts.push('</ul>'); inList = false; }
-      const text = line.replace('## ', '');
-      htmlParts.push(`<h2>${text}</h2>`);
+      if (inList) {
+        nodes.push(<ul key={`list-end-${i}`}></ul>);
+        inList = false;
+      }
+      nodes.push(<h2 key={`h2-${i}`}>{line.replace('## ', '')}</h2>);
       continue;
     }
-    
-    // List items
+
     if (line.startsWith('- ')) {
       if (!inList) {
-        htmlParts.push('<ul>');
+        nodes.push(<ul key={`list-${listKey++}`}>
+          <li key={`li-${i}`}>{renderInlineText(line.replace('- ', ''))}</li>
+        </ul>);
         inList = true;
+      } else {
+        nodes.push(<li key={`li-${i}`}>{renderInlineText(line.replace('- ', ''))}</li>);
       }
-      let itemText = line.replace('- ', '');
-      itemText = itemText.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-      itemText = itemText.replace(/`(.+?)`/g, '<code>$1</code>');
-      htmlParts.push(`<li>${itemText}</li>`);
       continue;
     }
-    
-    // Close list if we're in one
+
     if (inList) {
-      htmlParts.push('</ul>');
+      nodes.push(<ul key={`list-end-${i}`}></ul>);
       inList = false;
     }
-    
-    // Regular paragraph - apply inline formatting
-    line = line.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-    line = line.replace(/\*(.+?)\*/g, '<em>$1</em>');
-    line = line.replace(/`(.+?)`/g, '<code>$1</code>');
-    htmlParts.push(`<p>${line}</p>`);
+
+    nodes.push(<p key={`p-${i}`}>{renderInlineText(line)}</p>);
   }
-  
-  if (inList) htmlParts.push('</ul>');
-  
-  return htmlParts.join('\n');
+
+  return nodes;
+}
+
+function slugifyHeading(text: string): string {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-');
 }
 
 // Extract headings for TOC
 function extractHeadings(content: string): { id: string; text: string; level: number }[] {
   const headings: { id: string; text: string; level: number }[] = [];
   const regex = /^(#{2,3}) (.+)$/gm;
-  let match;
+  let match: RegExpExecArray | null;
   while ((match = regex.exec(content)) !== null) {
+    const text = match[2];
     headings.push({
       level: match[1].length,
-      text: match[2],
-      id: match[2],
+      text,
+      id: slugifyHeading(text),
     });
   }
   return headings;
@@ -152,7 +192,7 @@ export default function BlogPost() {
 
   const isRTL = post.language === 'fa';
   const headings = extractHeadings(post.content);
-  const htmlContent = renderContent(post.content, isRTL);
+  const contentNodes = renderContent(post.content);
   const relatedPosts = getRelatedPosts(post.slug, post.tags, post.language);
 
   // Prev/Next navigation
@@ -218,10 +258,7 @@ export default function BlogPost() {
         </nav>
       )}
 
-      <div
-        className="blog-post-content"
-        dangerouslySetInnerHTML={{ __html: htmlContent }}
-      />
+      <div className="blog-post-content">{contentNodes}</div>
 
       {/* Related Posts / Auto-Suggestions */}
       {relatedPosts.length > 0 && (

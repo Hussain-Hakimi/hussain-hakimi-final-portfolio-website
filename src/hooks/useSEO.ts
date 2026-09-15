@@ -152,7 +152,7 @@ function updateBreadcrumbSchema(pathname: string) {
   if (!breadcrumbScript) return;
   
   const baseUrl = 'https://hussain-hakimi.vercel.app';
-  const items: any[] = [
+  const items: Array<{ '@type': string; position: number; name: string; item: string }> = [
     {
       '@type': 'ListItem',
       position: 1,
@@ -189,6 +189,6 @@ function updateBreadcrumbSchema(pathname: string) {
 // Type declaration for gtag
 declare global {
   interface Window {
-    gtag: (...args: any[]) => void;
+    gtag: (...args: unknown[]) => void;
   }
 }

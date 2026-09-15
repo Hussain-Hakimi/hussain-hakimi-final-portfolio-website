@@ -536,7 +536,6 @@ export function ContactSection() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
     setSubmitted(true);
     setFormData({ name: '', email: '', message: '' });
     setTimeout(() => setSubmitted(false), 5000);
