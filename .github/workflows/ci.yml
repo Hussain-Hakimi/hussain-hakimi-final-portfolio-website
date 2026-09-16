@@ -18,7 +18,7 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: |
-          npm config set registry https://registry.yarnpkg.com
+          npm config set registry https://registry.npmjs.org/
           npm ci --prefer-online --fetch-retries=5 --fetch-retry-factor=2 --fetch-retry-mintimeout=1000 --fetch-retry-maxtimeout=60000
       - name: Typecheck
         run: npm run typecheck
