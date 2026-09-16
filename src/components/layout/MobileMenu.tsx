@@ -33,12 +33,10 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           <span className="mobile-navigation-eyebrow">Menu / 2026</span>
           <button ref={closeButton} className="mobile-navigation-close" onClick={onClose} tabIndex={isOpen ? 0 : -1} aria-label="Close navigation"><X size={20} /></button>
         </div>
-
         <div className="mobile-navigation-intro">
           <Link to="/" onClick={onClose} className="mobile-navigation-brand">H<span>.</span>Hakimi</Link>
           <p>Designing dependable digital experiences and building useful things for the web.</p>
         </div>
-
         <nav className="mobile-navigation-links" aria-label="Mobile primary navigation">
           {navigation.map((item, index) => <NavLink key={item.path} to={item.path} onClick={onClose} tabIndex={isOpen ? 0 : -1} className={({ isActive }) => `mobile-navigation-link ${isActive ? 'active' : ''}`}>
             <span className="mobile-navigation-index">0{index + 1}</span>
@@ -46,14 +44,13 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             <ArrowUpRight className="mobile-navigation-arrow" size={20} aria-hidden="true" />
           </NavLink>)}
         </nav>
-
         <div className="mobile-navigation-footer">
           <div>
             <span className="mobile-navigation-footer-label">Elsewhere</span>
             <div className="mobile-navigation-socials">
-              <a href={siteConfig.github} target="_blank" rel="noreferrer" tabIndex={isOpen ? 0 : -1} aria-label="GitHub"><Github size={18} /></a>
-              <a href={siteConfig.linkedin} target="_blank" rel="noreferrer" tabIndex={isOpen ? 0 : -1} aria-label="LinkedIn"><Linkedin size={18} /></a>
-              <a href={`mailto:${siteConfig.email}`} tabIndex={isOpen ? 0 : -1} aria-label="Email"><Mail size={18} /></a>
+              <a href={siteConfig.github} target="_blank" rel="noopener noreferrer" tabIndex={isOpen ? 0 : -1} aria-label="GitHub"><Github size={18} /></a>
+              <a href={siteConfig.linkedin} target="_blank" rel="noopener noreferrer" tabIndex={isOpen ? 0 : -1} aria-label="LinkedIn"><Linkedin size={18} /></a>
+              {siteConfig.email && <a href={`mailto:${siteConfig.email}`} tabIndex={isOpen ? 0 : -1} aria-label="Email"><Mail size={18} /></a>}
             </div>
           </div>
           <span className="mobile-navigation-availability"><span />Available for select work</span>
