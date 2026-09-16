@@ -8,7 +8,7 @@ export interface Project {
   challenge: string;
   solution: string;
   tech: string[];
-  emoji: string;
+  image: string;
   liveUrl?: string;
   repoUrl?: string;
 }
