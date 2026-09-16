@@ -9,6 +9,6 @@ export interface Project {
   solution: string;
   tech: string[];
   emoji: string;
-  liveUrl: string;
-  repoUrl: string;
+  liveUrl?: string;
+  repoUrl?: string;
 }

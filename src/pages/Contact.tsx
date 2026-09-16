@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { siteConfig } from '../data';
+import { submitContactForm } from '../services/contactService';
 
 function useScrollAnimation() {
   const ref = useRef<HTMLDivElement>(null);
@@ -24,7 +25,8 @@ function AnimatedSection({ children }: { children: React.ReactNode }) {
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
-  const [errors, setErrors] = useState<{ name?: string; email?: string; message?: string }>({});
+  const [errors, setErrors] = useState<{ name?: string; email?: string; message?: string; form?: string }>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validate = () => {
     const newErrors: typeof errors = {};
@@ -36,13 +38,23 @@ export default function Contact() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
-    setSubmitted(true);
-    setFormData({ name: '', email: '', message: '' });
+
+    setIsSubmitting(true);
     setErrors({});
-    setTimeout(() => setSubmitted(false), 5000);
+
+    try {
+      await submitContactForm(formData);
+      setSubmitted(true);
+      setFormData({ name: '', email: '', message: '' });
+      window.setTimeout(() => setSubmitted(false), 5000);
+    } catch (error) {
+      setErrors({ form: error instanceof Error ? error.message : 'Unable to send your message right now.' });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -65,64 +77,28 @@ export default function Contact() {
                 <form className="contact-form" onSubmit={handleSubmit} noValidate>
                   <div className="form-group">
                     <label htmlFor="contact-name" className="form-label">Name *</label>
-                    <input
-                      id="contact-name"
-                      type="text"
-                      className="form-input"
-                      placeholder="Your full name"
-                      value={formData.name}
-                      onChange={e => { setFormData({ ...formData, name: e.target.value }); setErrors({ ...errors, name: undefined }); }}
-                      required
-                      aria-required="true"
-                      aria-invalid={!!errors.name}
-                      aria-describedby={errors.name ? 'name-error' : undefined}
-                    />
-                    {errors.name && <span id="name-error" style={{ color: '#ef4444', fontSize: '0.85rem', marginTop: '4px', display: 'block' }}>{errors.name}</span>}
+                    <input id="contact-name" type="text" className="form-input" placeholder="Your full name" value={formData.name} onChange={e => { setFormData({ ...formData, name: e.target.value }); setErrors({ ...errors, name: undefined, form: undefined }); }} required aria-required="true" aria-invalid={!!errors.name} aria-describedby={errors.name ? 'name-error' : undefined} />
+                    {errors.name && <span id="name-error" role="alert" style={{ color: '#ef4444', fontSize: '0.85rem', marginTop: '4px', display: 'block' }}>{errors.name}</span>}
                   </div>
-                  
+
                   <div className="form-group">
                     <label htmlFor="contact-email" className="form-label">Email *</label>
-                    <input
-                      id="contact-email"
-                      type="email"
-                      className="form-input"
-                      placeholder="your@email.com"
-                      value={formData.email}
-                      onChange={e => { setFormData({ ...formData, email: e.target.value }); setErrors({ ...errors, email: undefined }); }}
-                      required
-                      aria-required="true"
-                      aria-invalid={!!errors.email}
-                      aria-describedby={errors.email ? 'email-error' : undefined}
-                    />
-                    {errors.email && <span id="email-error" style={{ color: '#ef4444', fontSize: '0.85rem', marginTop: '4px', display: 'block' }}>{errors.email}</span>}
+                    <input id="contact-email" type="email" className="form-input" placeholder="your@email.com" value={formData.email} onChange={e => { setFormData({ ...formData, email: e.target.value }); setErrors({ ...errors, email: undefined, form: undefined }); }} required aria-required="true" aria-invalid={!!errors.email} aria-describedby={errors.email ? 'email-error' : undefined} />
+                    {errors.email && <span id="email-error" role="alert" style={{ color: '#ef4444', fontSize: '0.85rem', marginTop: '4px', display: 'block' }}>{errors.email}</span>}
                   </div>
-                  
+
                   <div className="form-group">
                     <label htmlFor="contact-message" className="form-label">Message *</label>
-                    <textarea
-                      id="contact-message"
-                      className="form-textarea"
-                      placeholder="Tell me about your project, idea, or just say hi..."
-                      value={formData.message}
-                      onChange={e => { setFormData({ ...formData, message: e.target.value }); setErrors({ ...errors, message: undefined }); }}
-                      required
-                      aria-required="true"
-                      aria-invalid={!!errors.message}
-                      aria-describedby={errors.message ? 'message-error' : undefined}
-                      style={{ minHeight: '160px' }}
-                    />
-                    {errors.message && <span id="message-error" style={{ color: '#ef4444', fontSize: '0.85rem', marginTop: '4px', display: 'block' }}>{errors.message}</span>}
+                    <textarea id="contact-message" className="form-textarea" placeholder="Tell me about your project, idea, or just say hi..." value={formData.message} onChange={e => { setFormData({ ...formData, message: e.target.value }); setErrors({ ...errors, message: undefined, form: undefined }); }} required aria-required="true" aria-invalid={!!errors.message} aria-describedby={errors.message ? 'message-error' : undefined} style={{ minHeight: '160px' }} />
+                    {errors.message && <span id="message-error" role="alert" style={{ color: '#ef4444', fontSize: '0.85rem', marginTop: '4px', display: 'block' }}>{errors.message}</span>}
                   </div>
-                  
-                  <button type="submit" className="btn btn-primary">
-                    Send Message →
+
+                  <button type="submit" className="btn btn-primary" disabled={isSubmitting} aria-busy={isSubmitting}>
+                    {isSubmitting ? 'Sending…' : 'Send Message →'}
                   </button>
-                  
-                  {submitted && (
-                    <div className="form-success" role="alert">
-                      ✓ Message sent successfully! I'll get back to you within 24 hours.
-                    </div>
-                  )}
+
+                  {errors.form && <div className="form-error" role="alert">{errors.form}</div>}
+                  {submitted && <div className="form-success" role="status">✓ Message sent successfully! I'll get back to you within 24 hours.</div>}
                 </form>
               </div>
             </AnimatedSection>
@@ -134,15 +110,9 @@ export default function Contact() {
                   Prefer a more direct approach? Find me on these platforms.
                 </p>
                 <div className="contact-links">
-                  <a href={siteConfig.github} className="social-pill" target="_blank" rel="noopener noreferrer">
-                    <span aria-hidden="true">⚡</span> GitHub
-                  </a>
-                  <a href={siteConfig.linkedin} className="social-pill" target="_blank" rel="noopener noreferrer">
-                    <span aria-hidden="true">💼</span> LinkedIn
-                  </a>
-                  <a href={`mailto:${siteConfig.email}`} className="social-pill">
-                    <span aria-hidden="true">✉️</span> {siteConfig.email}
-                  </a>
+                  <a href={siteConfig.github} className="social-pill" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">⚡</span> GitHub</a>
+                  <a href={siteConfig.linkedin} className="social-pill" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">💼</span> LinkedIn</a>
+                  {siteConfig.email && <a href={`mailto:${siteConfig.email}`} className="social-pill"><span aria-hidden="true">✉️</span> {siteConfig.email}</a>}
                 </div>
               </div>
             </AnimatedSection>
