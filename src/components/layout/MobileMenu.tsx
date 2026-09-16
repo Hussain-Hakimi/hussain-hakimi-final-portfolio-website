@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { ArrowUpRight, Github, Linkedin, Mail, X } from 'lucide-react';
 import { Link, NavLink } from 'react-router-dom';
 import { navigation, siteConfig } from '../../data';
@@ -49,7 +50,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
     };
   }, [isOpen, onClose]);
 
-  return (
+  const menu = (
     <div className={`mobile-navigation ${isOpen ? 'is-open' : ''}`} aria-hidden={!isOpen}>
       <button
         className="mobile-navigation-backdrop"
@@ -121,4 +122,6 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       </aside>
     </div>
   );
+
+  return createPortal(menu, document.body);
 }
