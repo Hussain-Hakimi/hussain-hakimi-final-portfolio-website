@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { blogPosts, projects } from '../data';
 
-const BASE_URL = 'https://hussain-hakimi.vercel.app';
+const BASE_URL = 'https://hussainhakimidev.vercel.app';
 
 type SeoConfig = {
   title: string;
