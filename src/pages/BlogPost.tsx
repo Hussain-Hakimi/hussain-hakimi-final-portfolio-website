@@ -93,13 +93,13 @@ export default function BlogPost() {
 
   useEffect(() => {
     if (!post) return;
-    const canonical = `https://hussain-hakimi.vercel.app/blog/${post.slug}`;
+    const canonical = `https://hussainhakimidev.vercel.app/blog/${post.slug}`;
     const schema = {
       '@context': 'https://schema.org',
       '@type': 'BlogPosting',
       headline: post.title,
       description: post.excerpt,
-      author: { '@type': 'Person', name: 'Hussain Hakimi', url: 'https://hussain-hakimi.vercel.app/about' },
+      author: { '@type': 'Person', name: 'Hussain Hakimi', url: 'https://hussainhakimidev.vercel.app/about' },
       publisher: { '@type': 'Organization', name: 'Hussain Hakimi Portfolio' },
       datePublished: post.date,
       dateModified: post.date,
