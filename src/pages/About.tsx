@@ -70,7 +70,7 @@ export default function About() {
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '16px' }}>
                     <a href={siteConfig.github} className="social-pill" target="_blank" rel="noopener noreferrer" style={{ justifyContent: 'center' }}><span aria-hidden="true">⚡</span> GitHub</a>
                     <a href={siteConfig.linkedin} className="social-pill" target="_blank" rel="noopener noreferrer" style={{ justifyContent: 'center' }}><span aria-hidden="true">💼</span> LinkedIn</a>
-                    <a href={`mailto:${siteConfig.email}`} className="social-pill" style={{ justifyContent: 'center' }}><span aria-hidden="true">✉️</span> Email</a>
+                    {siteConfig.email && <a href={`mailto:${siteConfig.email}`} className="social-pill" style={{ justifyContent: 'center' }}><span aria-hidden="true">✉️</span> Email</a>}
                     <a href={siteConfig.resume} className="social-pill" download="Hussain-Hakimi-Resume.pdf" style={{ justifyContent: 'center' }}><span aria-hidden="true">↓</span> Download Resume</a>
                   </div>
                 </div>
