@@ -7,12 +7,5 @@ Allow: /
 # Sitemap
 Sitemap: https://hussain-hakimi.vercel.app/sitemap.xml
 
-# Disallow admin and draft routes (if any)
-Disallow: /admin
-Disallow: /drafts
-Disallow: /api
-Disallow: /_next
-Disallow: /private
-
 # Crawl-delay for polite crawling
 Crawl-delay: 1
