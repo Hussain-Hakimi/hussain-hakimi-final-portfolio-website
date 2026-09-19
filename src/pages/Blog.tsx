@@ -5,7 +5,7 @@ import { blogPosts } from '../data';
 function useScrollAnimation() {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    const prefersReduced = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReduced) { ref.current?.classList.add('visible'); return; }
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } },
