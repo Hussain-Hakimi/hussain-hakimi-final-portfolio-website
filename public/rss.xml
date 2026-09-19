@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
     <title>Hussain Hakimi — Software Engineering Blog</title>
-    <link>https://hussain-hakimi.vercel.app/</link>
+    <link>https://hussainhakimidev.vercel.app/</link>
     <description>Articles on frontend development, software engineering, data analytics, and career growth by Hussain Hakimi.</description>
     <language>en</language>
     <copyright>Copyright 2026, Hussain Hakimi</copyright>
-    <atom:link href="https://hussain-hakimi.vercel.app/rss.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://hussainhakimidev.vercel.app/rss.xml" rel="self" type="application/rss+xml" />
 
     <item>
       <title>چگونه یک وب‌سایت سریع و زیبا بسازیم</title>
-      <link>https://hussain-hakimi.vercel.app/blog/sakht-e-web-sayit-sari</link>
-      <guid>https://hussain-hakimi.vercel.app/blog/sakht-e-web-sayit-sari</guid>
+      <link>https://hussainhakimidev.vercel.app/blog/sakht-e-web-sayit-sari</link>
+      <guid>https://hussainhakimidev.vercel.app/blog/sakht-e-web-sayit-sari</guid>
       <pubDate>Sun, 20 Apr 2025 00:00:00 GMT</pubDate>
       <dc:creator>Hussain Hakimi</dc:creator>
       <description>نکات کلیدی برای ساخت وب‌سایت‌هایی که هم زیبا هستند و هم عملکرد عالی دارند.</description>
@@ -21,8 +21,8 @@
 
     <item>
       <title>مسیر من به سمت برنامه‌نویسی</title>
-      <link>https://hussain-hakimi.vercel.app/blog/masir-e-man-be-barname-nevisi</link>
-      <guid>https://hussain-hakimi.vercel.app/blog/masir-e-man-be-barname-nevisi</guid>
+      <link>https://hussainhakimidev.vercel.app/blog/masir-e-man-be-barname-nevisi</link>
+      <guid>https://hussainhakimidev.vercel.app/blog/masir-e-man-be-barname-nevisi</guid>
       <pubDate>Sat, 05 Apr 2025 00:00:00 GMT</pubDate>
       <dc:creator>Hussain Hakimi</dc:creator>
       <description>داستان تغییر مسیر من از رشته مدیریت بازرگانی به مهندسی نرم‌افزار.</description>
@@ -32,8 +32,8 @@
 
     <item>
       <title>Building a Blazing-Fast Portfolio with Astro</title>
-      <link>https://hussain-hakimi.vercel.app/blog/building-a-portfolio-with-astro</link>
-      <guid>https://hussain-hakimi.vercel.app/blog/building-a-portfolio-with-astro</guid>
+      <link>https://hussainhakimidev.vercel.app/blog/building-a-portfolio-with-astro</link>
+      <guid>https://hussainhakimidev.vercel.app/blog/building-a-portfolio-with-astro</guid>
       <pubDate>Mon, 10 Mar 2025 00:00:00 GMT</pubDate>
       <dc:creator>Hussain Hakimi</dc:creator>
       <description>How I built this portfolio using Astro to achieve a fast, interactive experience.</description>
@@ -43,8 +43,8 @@
 
     <item>
       <title>Understanding Big O Notation: A Beginner's Guide</title>
-      <link>https://hussain-hakimi.vercel.app/blog/understanding-big-o-notation</link>
-      <guid>https://hussain-hakimi.vercel.app/blog/understanding-big-o-notation</guid>
+      <link>https://hussainhakimidev.vercel.app/blog/understanding-big-o-notation</link>
+      <guid>https://hussainhakimidev.vercel.app/blog/understanding-big-o-notation</guid>
       <pubDate>Thu, 20 Feb 2025 00:00:00 GMT</pubDate>
       <dc:creator>Hussain Hakimi</dc:creator>
       <description>A practical guide to understanding algorithm complexity and Big O notation.</description>
@@ -54,8 +54,8 @@
 
     <item>
       <title>Why I Chose Software Engineering Over Business</title>
-      <link>https://hussain-hakimi.vercel.app/blog/why-i-chose-software-engineering</link>
-      <guid>https://hussain-hakimi.vercel.app/blog/why-i-chose-software-engineering</guid>
+      <link>https://hussainhakimidev.vercel.app/blog/why-i-chose-software-engineering</link>
+      <guid>https://hussainhakimidev.vercel.app/blog/why-i-chose-software-engineering</guid>
       <pubDate>Wed, 15 Jan 2025 00:00:00 GMT</pubDate>
       <dc:creator>Hussain Hakimi</dc:creator>
       <description>The story of how I pivoted from Business Administration to Software Engineering.</description>

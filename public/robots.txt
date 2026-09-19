@@ -1,11 +1,11 @@
 # Robots.txt for Hussain Hakimi Portfolio
-# https://hussain-hakimi.vercel.app/
+# https://hussainhakimidev.vercel.app/
 
 User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://hussain-hakimi.vercel.app/sitemap.xml
+Sitemap: https://hussainhakimidev.vercel.app/sitemap.xml
 
 # Crawl-delay for polite crawling
 Crawl-delay: 1
