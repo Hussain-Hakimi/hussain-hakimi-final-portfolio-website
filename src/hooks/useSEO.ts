@@ -135,7 +135,7 @@ export default function useSEO() {
     const pathname = location.pathname;
     const config = seoConfig[pathname] || defaultConfig;
     const blogPost = pathname.startsWith('/blog/')
-      ? blogPosts.find((post) => post.slug === pathname.slice('/blog/'.length))
+      ? blogPosts.find((post) => post.slug === pathname.slice('/blog/'.length) && post.language === 'en')
       : undefined;
     const project = pathname.startsWith('/projects/')
       ? projects.find((item) => item.slug === pathname.slice('/projects/'.length))
