@@ -42,7 +42,7 @@ export const projects = [
     tech: ['React', 'CSS3', 'JavaScript', 'REST API'],
     emoji: '🛒',
     liveUrl: '#',
-    repoUrl: 'https://github.com/Hussain-Hakimi',
+    repoUrl: '#',
   },
   {
     slug: 'dev-portfolio',
@@ -56,7 +56,7 @@ export const projects = [
     tech: ['Astro', 'TypeScript', 'CSS Custom Properties', 'Intersection Observer'],
     emoji: '🌐',
     liveUrl: '#',
-    repoUrl: 'https://github.com/Hussain-Hakimi',
+    repoUrl: '#',
   },
   {
     slug: 'road-accident-dashboard',
@@ -70,7 +70,7 @@ export const projects = [
     tech: ['Python', 'SQL', 'Data Visualization', 'Analytics'],
     emoji: '📊',
     liveUrl: '#',
-    repoUrl: 'https://github.com/Hussain-Hakimi',
+    repoUrl: '#',
   },
 ];
 
