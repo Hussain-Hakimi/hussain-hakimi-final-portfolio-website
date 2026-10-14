@@ -6,5 +6,6 @@ export interface SiteConfig {
   email: string;
   github: string;
   linkedin: string;
+  youtube: string;
   resume: string;
 }
