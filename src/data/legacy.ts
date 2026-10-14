@@ -23,10 +23,9 @@ export const navigation = [
 ];
 
 export const skills = [
-  'JavaScript', 'TypeScript', 'React', 'Next.js', 'Astro',
-  'HTML5', 'CSS3', 'Tailwind CSS', 'Node.js', 'Express',
-  'PostgreSQL', 'MongoDB', 'Git', 'GitHub', 'Figma',
-  'Python', 'Data Analytics', 'SQL', 'REST APIs', 'Responsive Design',
+  'HTML5', 'CSS3', 'JavaScript', 'React', 'TypeScript',
+  'Python', 'C#', 'SQL', 'Git', 'GitHub',
+  'Database Design', 'Data Analytics', 'Responsive Design',
 ];
 
 export const projects = [
@@ -35,42 +34,42 @@ export const projects = [
     title: 'MH Mega Mall',
     category: 'frontend',
     year: '2025',
-    description: 'A modern e-commerce platform with a sleek UI, product filtering, cart management, and responsive design built for optimal shopping experience.',
-    role: 'Frontend Developer & UI Designer',
-    challenge: 'Build a fully responsive e-commerce platform that provides a seamless shopping experience across all devices while maintaining fast load times and intuitive navigation.',
-    solution: 'Implemented a component-based architecture with React, optimized images and lazy loading, and designed an intuitive filtering system that helps users find products quickly.',
-    tech: ['React', 'CSS3', 'JavaScript', 'REST API'],
+    description: 'An online shopping website project focused on product browsing and a responsive shopping experience.',
+    role: 'Web Developer',
+    challenge: 'Build a clear shopping interface that works across common screen sizes.',
+    solution: 'Created the website interface with HTML, CSS, and JavaScript, with a Python backend as part of the project.',
+    tech: ['HTML', 'CSS', 'JavaScript', 'Python'],
     emoji: '🛒',
     liveUrl: '#',
-    repoUrl: 'https://github.com/Hussain-Hakimi',
+    repoUrl: '#',
   },
   {
     slug: 'dev-portfolio',
     title: 'Developer Portfolio',
     category: 'frontend',
-    year: '2025',
-    description: 'A personal portfolio website built with Astro, featuring dark mode, smooth animations, and a command palette for navigation.',
-    role: 'Full Stack Developer',
-    challenge: 'Create a portfolio that stands out to recruiters while demonstrating strong technical skills in modern web development, accessibility, and performance optimization.',
-    solution: 'Built with Astro for zero-JS-by-default performance, implemented a custom design system with CSS variables, added dark mode with no flash, and included accessibility features throughout.',
-    tech: ['Astro', 'TypeScript', 'CSS Custom Properties', 'Intersection Observer'],
+    year: '2026',
+    description: 'A responsive personal portfolio with project pages, a blog, dark mode, and a searchable navigation experience.',
+    role: 'Frontend Developer',
+    challenge: 'Organize projects, articles, and professional information in a maintainable portfolio.',
+    solution: 'Built a component-based single-page application using React, TypeScript, Vite, and reusable styling.',
+    tech: ['React', 'TypeScript', 'Vite', 'CSS'],
     emoji: '🌐',
     liveUrl: '#',
-    repoUrl: 'https://github.com/Hussain-Hakimi',
+    repoUrl: '#',
   },
   {
-    slug: 'road-accident-dashboard',
-    title: 'Road Accident Analytics Dashboard',
+    slug: 'data-visualization-system',
+    title: 'Interactive Data Visualization System',
     category: 'analytics',
-    year: '2024',
-    description: 'An interactive data analytics dashboard visualizing road accident patterns, helping identify high-risk areas and inform policy decisions.',
-    role: 'Data Analyst & Developer',
-    challenge: 'Transform raw accident data into actionable insights through an interactive dashboard that stakeholders can use to identify trends and make data-driven decisions.',
-    solution: 'Built an interactive dashboard with filterable charts, geographic heatmaps, and trend analysis. Used data aggregation techniques to surface meaningful patterns from thousands of records.',
-    tech: ['Python', 'SQL', 'Data Visualization', 'Analytics'],
+    year: '2026',
+    description: 'A small web application for exploring data and visualizing student marks with charts.',
+    role: 'Developer',
+    challenge: 'Present tabular data in a form that is easier to explore and understand.',
+    solution: 'Used Flask with HTML, CSS, and JavaScript, plus Matplotlib for chart generation.',
+    tech: ['Python', 'Flask', 'JavaScript', 'Matplotlib', 'Flask-CORS'],
     emoji: '📊',
     liveUrl: '#',
-    repoUrl: 'https://github.com/Hussain-Hakimi',
+    repoUrl: '#',
   },
 ];
 
@@ -180,72 +179,38 @@ Big O isn't about being perfect — it's about being aware. Understanding algori
     `,
   },
   {
-    slug: 'building-a-portfolio-with-astro',
-    title: 'Building a Blazing-Fast Portfolio with Astro',
+    slug: 'building-a-portfolio-with-react',
+    title: 'Building a Portfolio with React and TypeScript',
     date: '2025-03-10',
     readTime: '6 min read',
     language: 'en' as const,
-    tags: ['Web Development', 'Tutorial'],
-    excerpt: 'How I built this portfolio using Astro to achieve perfect Lighthouse scores while maintaining a beautiful, interactive design.',
+    tags: ['React', 'TypeScript', 'Web Development'],
+    excerpt: 'A practical overview of organizing a portfolio with reusable React components, typed data, and a clear route structure.',
     emoji: '⚡',
     content: `
-## Why Astro?
+## Start with the content
 
-When I decided to rebuild my portfolio, I had specific requirements:
+A portfolio should make it easy for visitors to understand who you are, what you have built, and how to contact you. Before choosing a design, list the projects, skills, and links you can accurately stand behind.
 
-- **Perfect performance scores** on Lighthouse
-- **Beautiful design** with animations and interactivity
-- **Zero unnecessary JavaScript** shipped to the browser
-- **Great developer experience** with TypeScript support
+## Use reusable components
 
-Astro checked every box.
+React components help keep repeated interface patterns consistent. Cards, navigation items, and page sections can be built once and reused across the site.
 
-## The Architecture
+## Keep content separate from presentation
 
-Astro's island architecture means each component can be static HTML by default, with JavaScript only where needed. For my portfolio:
+Store project and article details in data files rather than scattering them through page components. This makes updates easier and reduces accidental inconsistencies.
 
-- All layout and content is static HTML
-- Theme toggle uses a tiny inline script
-- Typewriter effect loads only on the homepage
-- Scroll animations use the native Intersection Observer API
+## Add TypeScript gradually
 
-## The Design System
+TypeScript can describe the shape of project and article data, helping catch missing or incorrectly named fields before the site is built.
 
-I built a complete design system using CSS Custom Properties:
+## Test before publishing
 
-- **Light and dark mode** with smooth transitions
-- **Consistent spacing** using a modular scale
-- **Accessible color contrast** meeting WCAG AA
-- **Responsive design** that works on every screen size
+Run the type checker and production build, then open the main routes on desktop and mobile. Check that every visible button and link has a real destination.
 
-## Key Features
+## Final takeaway
 
-### Dark Mode Without Flash
-A small inline script in the HTML head reads the user's preference before the page renders, preventing any flash of incorrect theme.
-
-### Command Palette
-Press ⌘K to open a Spotlight-style search overlay. Built with vanilla TypeScript — no dependencies.
-
-### Scroll Animations
-Using Intersection Observer to fade sections in as they enter the viewport. Respects prefers-reduced-motion.
-
-## Results
-
-- **100/100** on all Lighthouse metrics
-- **< 50KB** total JavaScript
-- **Sub-second** load times
-- **Full accessibility** compliance
-
-## Lessons Learned
-
-1. **Start with performance in mind.** It's easier to build fast than to optimize later.
-2. **CSS Custom Properties are powerful.** They enable theming without JavaScript.
-3. **Less JavaScript = better UX.** Every KB you ship is a KB the user has to download and parse.
-4. **Accessibility is not optional.** Semantic HTML and ARIA attributes should be built in from the start.
-
-## Final Thoughts
-
-Astro is perfect for content-focused websites like portfolios and blogs. If you want a fast, beautiful site without the overhead of a full SPA framework, give it a try.
+A professional portfolio is not about listing every technology. It is about presenting a small set of real projects clearly, keeping claims accurate, and making it easy for people to reach you.
     `,
   },
   {
@@ -348,13 +313,6 @@ Astro is perfect for content-focused websites like portfolios and blogs. If you 
 
 export const experience = [
   {
-    title: 'Volunteer Instructor',
-    organization: 'Community Education Center',
-    period: '2022 – Present',
-    description: 'Teaching foundational programming concepts to beginners. Designed curriculum covering HTML, CSS, and JavaScript basics. Mentored 50+ students in their coding journey.',
-    icon: '🎓',
-  },
-  {
     title: 'Software Engineering Student',
     organization: 'UET Lahore',
     period: '2025 – 2029',
@@ -374,5 +332,5 @@ export const aboutStory = [
   "I'm Hussain Hakimi, a Software Engineering student at UET Lahore with a unique background. I started my academic journey in Business Administration, but a chance encounter with web development changed my trajectory forever.",
   "What began as curiosity quickly became passion. I spent countless nights building projects, learning new technologies, and immersing myself in the developer community. The ability to create something from nothing — just logic and creativity — captivated me.",
   "Today, I focus on frontend development, database design, and data analytics. I believe in building software that is not just functional, but beautiful and accessible to everyone. My business background gives me a unique perspective on product thinking and user experience.",
-  "When I'm not coding, you'll find me volunteering as a programming instructor, contributing to open-source projects, or exploring the latest in web technologies. I'm always looking for opportunities to learn, grow, and build meaningful things.",
+  "Outside coursework, I keep learning by building small projects, documenting what I learn, and exploring practical uses for software. I'm always looking for opportunities to improve and collaborate on meaningful work.",
 ];

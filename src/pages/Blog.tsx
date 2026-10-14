@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { blogPosts } from '../data';
 
@@ -23,15 +23,11 @@ function AnimatedSection({ children }: { children: React.ReactNode }) {
 }
 
 export default function Blog() {
-  const [langFilter, setLangFilter] = useState<'all' | 'en' | 'fa'>('all');
-  
   // Sort posts by date (newest first)
   const sortedPosts = [...blogPosts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   
   // Filter by language
-  const filteredPosts = langFilter === 'all' 
-    ? sortedPosts 
-    : sortedPosts.filter(p => p.language === langFilter);
+  const filteredPosts = sortedPosts.filter((post) => post.language === 'en');
 
   return (
     <>
@@ -41,41 +37,15 @@ export default function Blog() {
             <span className="section-label">Blog</span>
             <h1>Articles & Thoughts</h1>
             <p>Writing about software engineering, web development, career growth, and the things I learn along the way.</p>
-            <p style={{ marginTop: '8px', fontSize: '0.95rem' }}>
-              مقالات فارسی و انگلیسی درباره مهندسی نرم‌افزار و توسعه وب
-            </p>
           </AnimatedSection>
         </div>
       </div>
 
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="container">
-          {/* Language Filter */}
-          <AnimatedSection>
-            <div className="filter-buttons" role="group" aria-label="Filter by language">
-              <button
-                className={`filter-btn ${langFilter === 'all' ? 'active' : ''}`}
-                onClick={() => setLangFilter('all')}
-                aria-pressed={langFilter === 'all'}
-              >
-                All
-              </button>
-              <button
-                className={`filter-btn ${langFilter === 'en' ? 'active' : ''}`}
-                onClick={() => setLangFilter('en')}
-                aria-pressed={langFilter === 'en'}
-              >
-                🇬🇧 English
-              </button>
-              <button
-                className={`filter-btn ${langFilter === 'fa' ? 'active' : ''}`}
-                onClick={() => setLangFilter('fa')}
-                aria-pressed={langFilter === 'fa'}
-              >
-                🇮🇷 فارسی
-              </button>
-            </div>
-          </AnimatedSection>
+          <AnimatedSection><p className="section-label">English articles</p></AnimatedSection>
+
+
 
           <div className="blog-grid">
             {filteredPosts.map(post => {

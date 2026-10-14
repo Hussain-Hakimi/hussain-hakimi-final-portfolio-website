@@ -9,20 +9,14 @@
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/favicon/favicon-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/favicon/favicon-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
     }
   ],
   "categories": ["education", "productivity", "developer tools"],
   "lang": "en",
   "dir": "ltr",
-  "scope": "https://hussain-hakimi.vercel.app/"
+  "scope": "https://hussainhakimidev.vercel.app/"
 }

@@ -98,7 +98,7 @@ export default function Contact() {
                   </button>
 
                   {errors.form && <div className="form-error" role="alert">{errors.form}</div>}
-                  {submitted && <div className="form-success" role="status">✓ Message sent successfully! I'll get back to you within 24 hours.</div>}
+                  {submitted && <div className="form-success" role="status">✓ Thanks — your message has been sent. I'll get back to you as soon as I can.</div>}
                 </form>
               </div>
             </AnimatedSection>

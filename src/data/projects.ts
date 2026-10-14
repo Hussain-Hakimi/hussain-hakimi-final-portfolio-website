@@ -7,7 +7,7 @@ import storeManagementScreenshot from '../assets/projects/store management syste
 const projectImages: Record<string, string> = {
   'mh-mega-mall': storeManagementScreenshot,
   'dev-portfolio': portfolioScreenshot,
-  'road-accident-dashboard': dashboardScreenshot,
+  'data-visualization-system': dashboardScreenshot,
 };
 
 // Used whenever a project has no matching entry in projectImages above (e.g. a

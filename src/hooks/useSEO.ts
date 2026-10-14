@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { blogPosts, projects } from '../data';
+import { learningResources } from '../data/resources';
 
 const BASE_URL = 'https://hussainhakimidev.vercel.app';
 
@@ -40,6 +41,13 @@ const seoConfig: Record<string, SeoConfig> = {
     keywords: 'Hussain Hakimi blog, software engineering blog, frontend development, algorithms, web development',
     ogTitle: 'Blog | Hussain Hakimi',
     ogDescription: 'Software engineering and web development articles by Hussain Hakimi.',
+  },
+  '/resources': {
+    title: 'Programming Resources | Hussain Hakimi',
+    description: 'A growing library of programming video lessons, notes, code examples, and exercises by Hussain Hakimi.',
+    keywords: 'programming resources, C# lessons, Python tutorials, SQL notes, Hussain Hakimi',
+    ogTitle: 'Programming Resources | Hussain Hakimi',
+    ogDescription: 'Explore programming lesson structures, notes, examples, and exercises.',
   },
   '/certifications': {
     title: 'Certifications | Hussain Hakimi',
@@ -119,18 +127,23 @@ export default function useSEO() {
     const pathname = location.pathname;
     const config = seoConfig[pathname] || defaultConfig;
     const blogPost = pathname.startsWith('/blog/')
-      ? blogPosts.find((post) => post.slug === pathname.slice('/blog/'.length))
+      ? blogPosts.find((post) => post.slug === pathname.slice('/blog/'.length) && post.language === 'en')
       : undefined;
     const project = pathname.startsWith('/projects/')
       ? projects.find((item) => item.slug === pathname.slice('/projects/'.length))
+      : undefined;
+    const resource = pathname.startsWith('/resources/')
+      ? learningResources.find((item) => item.slug === pathname.slice('/resources/'.length))
       : undefined;
 
     const pageTitle = blogPost
       ? `${blogPost.title} | Hussain Hakimi Blog`
       : project
         ? `${project.title} | Hussain Hakimi Projects`
-        : config.title;
-    const pageDescription = blogPost?.excerpt || project?.description || config.description;
+        : resource
+          ? `${resource.title} | Programming Resources`
+          : config.title;
+    const pageDescription = blogPost?.excerpt || project?.description || resource?.summary || config.description;
     const canonical = `${BASE_URL}${pathname === '/' ? '/' : pathname}`;
     const language = blogPost?.language || 'en';
 
@@ -138,15 +151,15 @@ export default function useSEO() {
     document.documentElement.lang = language;
     upsertMeta('meta[name="description"]', 'name', 'description', pageDescription);
     upsertMeta('meta[name="keywords"]', 'name', 'keywords', config.keywords);
-    upsertMeta('meta[property="og:title"]', 'property', 'og:title', blogPost?.title || project?.title || config.ogTitle);
+    upsertMeta('meta[property="og:title"]', 'property', 'og:title', blogPost?.title || project?.title || resource?.title || config.ogTitle);
     upsertMeta('meta[property="og:description"]', 'property', 'og:description', pageDescription);
     upsertMeta('meta[property="og:url"]', 'property', 'og:url', canonical);
-    upsertMeta('meta[name="twitter:title"]', 'name', 'twitter:title', blogPost?.title || project?.title || config.ogTitle);
+    upsertMeta('meta[name="twitter:title"]', 'name', 'twitter:title', blogPost?.title || project?.title || resource?.title || config.ogTitle);
     upsertMeta('meta[name="twitter:description"]', 'name', 'twitter:description', pageDescription);
     upsertCanonical(canonical);
     upsertBreadcrumbSchema(pathname);
 
-    const isKnownPage = pathname === '/' || pathname === '/about' || pathname === '/projects' || pathname === '/blog' || pathname === '/certifications' || pathname === '/contact' || Boolean(blogPost) || Boolean(project);
+    const isKnownPage = pathname === '/' || pathname === '/about' || pathname === '/projects' || pathname === '/blog' || pathname === '/resources' || pathname === '/certifications' || pathname === '/contact' || Boolean(blogPost) || Boolean(project) || Boolean(resource);
     upsertMeta('meta[name="robots"]', 'name', 'robots', isKnownPage ? 'index, follow' : 'noindex, follow');
   }, [location.pathname]);
 }

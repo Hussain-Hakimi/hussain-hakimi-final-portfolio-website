@@ -17,10 +17,7 @@ export async function submitContactForm(payload: ContactPayload) {
     throw new Error('Please enter a valid email address.');
   }
 
-  const endpoint = import.meta.env.VITE_CONTACT_ENDPOINT?.trim();
-  if (!endpoint) {
-    throw new Error('The contact form is not configured yet. Please use the direct email link instead.');
-  }
+  const endpoint = import.meta.env.VITE_CONTACT_ENDPOINT?.trim() || '/api/contact';
 
   const response = await fetch(endpoint, {
     method: 'POST',
@@ -29,7 +26,8 @@ export async function submitContactForm(payload: ContactPayload) {
   });
 
   if (!response.ok) {
-    throw new Error('Unable to send your message right now. Please try again or use the direct email link.');
+    const result = await response.json().catch(() => null) as { error?: string } | null;
+    throw new Error(result?.error || 'Unable to send your message right now. Please try again or contact me through GitHub or LinkedIn.');
   }
 
   return { accepted: true };

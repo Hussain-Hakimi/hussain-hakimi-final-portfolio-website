@@ -82,7 +82,7 @@ export default function About() {
 
       <section className="section section-alt">
         <div className="container">
-          <AnimatedSection><span className="section-label">Experience</span><h2 className="section-title">What I've done</h2></AnimatedSection>
+          <AnimatedSection><span className="section-label">Education & experience</span><h2 className="section-title">My academic journey</h2></AnimatedSection>
           <div className="experience-grid" style={{ marginTop: '40px' }}>{experience.map((exp, i) => <AnimatedSection key={i}><div className="experience-card"><div className="experience-card-icon" aria-hidden="true">{exp.icon}</div><h3 className="experience-card-title">{exp.title}</h3><div className="experience-card-subtitle">{exp.organization}</div><div className="experience-card-period">{exp.period}</div><p className="experience-card-desc">{exp.description}</p></div></AnimatedSection>)}</div>
         </div>
       </section>

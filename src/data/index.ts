@@ -4,6 +4,7 @@ export * from './certifications';
 export * from './experience';
 export * from './navigation';
 export * from './projects';
+export * from './resources';
 export * from './site';
 export * from './skills';
 export * from './testimonials';
