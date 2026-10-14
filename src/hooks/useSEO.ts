@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { blogPosts, projects } from '../data';
 import { learningResources } from '../data/resources';
-import { learningResources } from '../data/resources';
 
 const BASE_URL = 'https://hussainhakimidev.vercel.app';
 
@@ -42,13 +41,6 @@ const seoConfig: Record<string, SeoConfig> = {
     keywords: 'Hussain Hakimi blog, software engineering blog, frontend development, algorithms, web development',
     ogTitle: 'Blog | Hussain Hakimi',
     ogDescription: 'Software engineering and web development articles by Hussain Hakimi.',
-  },
-  '/resources': {
-    title: 'Programming Resources | Hussain Hakimi',
-    description: 'A growing library of programming video lessons, notes, code examples, and exercises by Hussain Hakimi.',
-    keywords: 'programming resources, C# lessons, Python tutorials, SQL notes, Hussain Hakimi',
-    ogTitle: 'Programming Resources | Hussain Hakimi',
-    ogDescription: 'Explore programming lesson structures, notes, examples, and exercises.',
   },
   '/resources': {
     title: 'Programming Resources | Hussain Hakimi',
@@ -139,9 +131,6 @@ export default function useSEO() {
       : undefined;
     const project = pathname.startsWith('/projects/')
       ? projects.find((item) => item.slug === pathname.slice('/projects/'.length))
-      : undefined;
-    const resource = pathname.startsWith('/resources/')
-      ? learningResources.find((item) => item.slug === pathname.slice('/resources/'.length))
       : undefined;
     const resource = pathname.startsWith('/resources/')
       ? learningResources.find((item) => item.slug === pathname.slice('/resources/'.length))
