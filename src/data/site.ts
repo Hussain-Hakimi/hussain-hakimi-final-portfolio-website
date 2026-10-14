@@ -5,5 +5,6 @@ export const siteConfig: SiteConfig = {
   ...legacySiteConfig,
   url: 'https://hussainhakimidev.vercel.app',
   email: import.meta.env.VITE_CONTACT_EMAIL || '',
+  youtube: 'https://www.youtube.com/@hussain_hakimi',
   resume: '/resume%20(5).pdf',
 };
