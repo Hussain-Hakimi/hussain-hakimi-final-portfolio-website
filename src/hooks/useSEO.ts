@@ -151,7 +151,7 @@ export default function useSEO() {
     document.documentElement.lang = language;
     upsertMeta('meta[name="description"]', 'name', 'description', pageDescription);
     upsertMeta('meta[name="keywords"]', 'name', 'keywords', config.keywords);
-    upsertMeta('meta[property="og:title"]', 'property', 'og:title', blogPost?.title || project?.title || config.ogTitle);
+    upsertMeta('meta[property="og:title"]', 'property', 'og:title', blogPost?.title || project?.title || resource?.title || config.ogTitle);
     upsertMeta('meta[property="og:description"]', 'property', 'og:description', pageDescription);
     upsertMeta('meta[property="og:url"]', 'property', 'og:url', canonical);
     upsertMeta('meta[name="twitter:title"]', 'name', 'twitter:title', blogPost?.title || project?.title || config.ogTitle);
