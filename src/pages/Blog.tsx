@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { blogPosts } from '../data';
 
@@ -23,8 +23,6 @@ function AnimatedSection({ children }: { children: React.ReactNode }) {
 }
 
 export default function Blog() {
-  const langFilter = 'en';
-  
   // Sort posts by date (newest first)
   const sortedPosts = [...blogPosts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   
