@@ -112,6 +112,7 @@ export default function Contact() {
                 <div className="contact-links">
                   <a href={siteConfig.github} className="social-pill" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">⚡</span> GitHub</a>
                   <a href={siteConfig.linkedin} className="social-pill" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">💼</span> LinkedIn</a>
+                  <a href={siteConfig.youtube} className="social-pill" target="_blank" rel="noopener noreferrer" aria-label="YouTube channel"><span aria-hidden="true">▶️</span> YouTube</a>
                   {siteConfig.email && <a href={`mailto:${siteConfig.email}`} className="social-pill"><span aria-hidden="true">✉️</span> {siteConfig.email}</a>}
                 </div>
               </div>
