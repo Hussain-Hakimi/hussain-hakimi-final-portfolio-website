@@ -154,7 +154,7 @@ export default function useSEO() {
     upsertMeta('meta[property="og:title"]', 'property', 'og:title', blogPost?.title || project?.title || resource?.title || config.ogTitle);
     upsertMeta('meta[property="og:description"]', 'property', 'og:description', pageDescription);
     upsertMeta('meta[property="og:url"]', 'property', 'og:url', canonical);
-    upsertMeta('meta[name="twitter:title"]', 'name', 'twitter:title', blogPost?.title || project?.title || config.ogTitle);
+    upsertMeta('meta[name="twitter:title"]', 'name', 'twitter:title', blogPost?.title || project?.title || resource?.title || config.ogTitle);
     upsertMeta('meta[name="twitter:description"]', 'name', 'twitter:description', pageDescription);
     upsertCanonical(canonical);
     upsertBreadcrumbSchema(pathname);
