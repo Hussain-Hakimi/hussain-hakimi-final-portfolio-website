@@ -1,26 +1,136 @@
-import { projects as legacyProjects } from './legacy';
 import type { Project } from '../types';
 import portfolioScreenshot from '../assets/projects/Hussain Portfolio website .jpeg';
 import dashboardScreenshot from '../assets/projects/dashboard.png';
 import storeManagementScreenshot from '../assets/projects/store management system.PNG';
 
-const projectImages: Record<string, string> = {
-  'mh-mega-mall': storeManagementScreenshot,
-  'dev-portfolio': portfolioScreenshot,
-  'data-visualization-system': dashboardScreenshot,
-};
-
-// Used whenever a project has no matching entry in projectImages above (e.g. a
-// newly added project without a screenshot yet), so <img> never renders with an
-// empty src and a broken-image icon.
 function buildPlaceholderImage(title: string): string {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500"><rect width="800" height="500" fill="#eef2ff"/><text x="400" y="250" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="700" fill="#4f46e5" text-anchor="middle">${title}</text><text x="400" y="290" font-family="system-ui, -apple-system, sans-serif" font-size="16" fill="#6366f1" text-anchor="middle">Preview coming soon</text></svg>`;
   return `data:image/svg+xml,${encodeURIComponent(svg)}`;
 }
 
-export const projects: Project[] = legacyProjects.map((project) => ({
-  ...project,
-  image: projectImages[project.slug] ?? buildPlaceholderImage(project.title),
-  liveUrl: project.liveUrl && project.liveUrl !== '#' ? project.liveUrl : undefined,
-  repoUrl: project.repoUrl && project.repoUrl !== '#' ? project.repoUrl : undefined,
-}));
+const placeholder = (title: string) => buildPlaceholderImage(title);
+
+export const projects: Project[] = [
+  {
+    slug: 'maktab-management-system',
+    title: 'Maktab Management System',
+    category: 'software',
+    year: '2026',
+    summary: 'An offline-first Windows application for managing Afghan school records and administration.',
+    description: 'Maktab is a self-contained school management system for institutions that need reliable academic, attendance, reporting, and administration workflows without internet access.',
+    role: 'Developer; the documented work includes the layered architecture, application workflows, localization, security, backups, imports, tests, and CI configuration.',
+    problem: 'Schools with limited connectivity and modest hardware need software that supports Dari/Persian workflows, Afghan grading conventions, multiple academic years, and safe local data management.',
+    solution: 'A WPF desktop application backed by SQLite combines academic management, attendance, reporting, authentication, audit logging, import/export, and backup tools in one offline system.',
+    keyFeatures: ['Student enrollment and profiles', 'Marks, attendance, grading, and promotion', 'Dari/Persian RTL interface', 'PDF reports and Excel/CSV workflows', 'Role-based access and audit logging', 'Backup, restore, integrity checks, and USB export'],
+    implementation: 'Clean Architecture separates domain rules, application services, SQLite infrastructure, the WPF UI, and unit/integration tests. Dependency injection, repositories, transactions, foreign keys, and SQLite WAL mode protect maintainability and data integrity.',
+    decisions: ['SQLite for zero-configuration offline storage', 'WPF for the Windows environments used by target schools', 'PBKDF2 password hashing and application-level authorization', 'Transactional promotion and explicit academic-year scoping', 'ClosedXML for practical Excel-based school workflows'],
+    challenges: ['Offline operation was addressed with local storage, startup backups, retention policies, integrity checks, and USB export.', 'Regional workflows were addressed with RTL localization, Afghan grading rules, localized dates, and configurable promotion thresholds.', 'Unauthorized changes were limited with role checks, teacher assignments, protected services, and audit logs.'],
+    results: 'The project consolidates core school operations that would otherwise be spread across spreadsheets and tools. Version 1.9.1 is described as a production-hardening candidate pending a full regression run and real-school pilot.',
+    tech: ['C# 12', '.NET 8', 'WPF', 'SQLite', 'QuestPDF', 'ClosedXML', 'xUnit', 'GitHub Actions'],
+    image: placeholder('Maktab Management System'),
+    imageAlt: 'Maktab Management System preview placeholder',
+    repoUrl: 'https://github.com/Hussain-Hakimi/Maktab-Management-System',
+  },
+  {
+    slug: 'data-visualization-system',
+    title: 'Interactive Data Visualization System',
+    category: 'analytics',
+    year: '2026',
+    summary: 'A Flask application that turns student marks into customizable charts downloadable as PNG images.',
+    description: 'Users enter student names and marks, manage the records, select a chart type, customize the appearance, and generate a visual representation of the data.',
+    role: 'Developer; built the Flask app and API, Matplotlib graph generator, HTML/CSS/JavaScript interface, validation, responsive styling, and PNG download flow.',
+    problem: 'Raw marks are difficult to compare when shown only as numbers, so the project needed a simple, safe way to explore and visualize student performance.',
+    solution: 'A browser frontend sends validated data to a Flask endpoint, where Matplotlib generates bar, line, pie, or scatter charts and returns them as PNG responses.',
+    keyFeatures: ['Marks validation from 0 to 100', 'Add, review, and delete records', 'Bar, line, pie, and scatter charts', 'Color and size customization', 'Loading and error states', 'PNG display and download', 'Responsive layout and escaped names'],
+    implementation: 'Vanilla JavaScript stores records in browser memory and posts names, marks, graph type, color, and size to /generate-graph. The server validates matching arrays and uses Matplotlib Agg for non-interactive image generation.',
+    decisions: ['Flask keeps the graph API clear and focused', 'Matplotlib Agg works without a graphical desktop', 'Dedicated graph functions keep visualization logic understandable', 'Blob handling supports both display and download without another endpoint', 'HTML escaping prevents raw user input from becoming page markup'],
+    challenges: ['Different chart types were routed to dedicated Matplotlib functions.', 'Table synchronization was handled by rebuilding the view from a single JavaScript records array.', 'Responsive CSS adapts forms, actions, and the graph container to smaller screens.'],
+    results: 'The project demonstrates the complete path from browser data entry through a Python API to generated visual output, while practicing validation, binary responses, and responsive interface design.',
+    tech: ['HTML', 'CSS', 'Vanilla JavaScript', 'Python', 'Flask', 'Matplotlib', 'Flask-CORS', 'NumPy', 'PNG'],
+    image: dashboardScreenshot,
+    imageAlt: 'Interactive data visualization project screenshot',
+    repoUrl: 'https://github.com/Hussain-Hakimi/DataManipulation-Project',
+  },
+  {
+    slug: 'developer-portfolio',
+    title: 'Hussain Hakimi Portfolio Website',
+    category: 'frontend',
+    year: '2026',
+    summary: 'A responsive React and TypeScript portfolio for presenting projects, skills, experience, and learning.',
+    description: 'A public-facing portfolio that organizes projects, technical skills, education, experience, blog content, and contact information in one maintainable site.',
+    role: 'Developer; designed the interface, reusable components, centralized content model, responsive layouts, navigation tools, and deployment-ready structure.',
+    problem: 'A growing software engineering journey needed an accessible place to present different project types and technical context without overwhelming visitors.',
+    solution: 'A Vite-powered React single-page application uses reusable components and centralized data for project filtering, case studies, navigation, SEO, and responsive presentation.',
+    keyFeatures: ['Project filtering and case studies', 'Responsive desktop and mobile navigation', 'Dark midnight-sky visual system', 'Command palette and anchored navigation', 'Blog, skills, experience, and contact sections', 'SEO metadata, sitemap, and reduced-motion support'],
+    implementation: 'Typed project and site data feed reusable React components and route-level pages. Vite builds the application, while CSS layers provide responsive layouts, themes, animations, and accessibility states.',
+    decisions: ['Centralized content keeps updates separate from presentation', 'Component-based React structure supports consistent rendering', 'Responsive CSS and mobile navigation serve smaller screens', 'Route-aware SEO improves page sharing and discoverability'],
+    challenges: ['Different content types are represented by structured data objects.', 'Consistent project cards are rendered from the shared project model.', 'Content-heavy navigation is shortened with anchored links and a command palette.'],
+    results: 'The site provides a public home for projects, learning, skills, and goals, and demonstrates React component design, typed data, responsive UI, filtering, and deployable frontend structure.',
+    tech: ['React', 'TypeScript', 'Vite', 'CSS', 'Lucide React', 'Git', 'GitHub', 'Vercel'],
+    image: portfolioScreenshot,
+    imageAlt: 'Hussain Hakimi portfolio website screenshot',
+    liveUrl: 'https://hussain-developer.vercel.app',
+    repoUrl: 'https://github.com/Hussain-Hakimi/Portfolio_website',
+  },
+  {
+    slug: 'mh-mega-mall',
+    title: 'MH Mega Mall',
+    category: 'frontend',
+    year: '2026',
+    summary: 'An e-commerce-style web project with product browsing, account forms, and a local shopping cart.',
+    description: 'MH Mega Mall combines a browser-based storefront prototype with a separate Python command-line prototype for users, products, roles, and carts.',
+    role: 'Individual developer across the frontend, Python prototype, styling, and asset work.',
+    problem: 'The project needed to create an online-mall experience with product presentation, account pages, and cart interactions while working without a connected web API.',
+    solution: 'HTML, CSS, and vanilla JavaScript load product JSON, render cards and product details, and manage authentication and cart data through browser localStorage. A separate Python program stores terminal data in JSON files.',
+    keyFeatures: ['Product listings and detail pages', 'Sign-up and sign-in forms', 'Browser-based local cart', 'JSON product data', 'Role-specific Python menus', 'Responsive storefront styling'],
+    implementation: 'Frontend pages use vanilla JavaScript and localStorage; product detail and cart modules share browser state. The Python prototype uses the standard json, os, and uuid libraries with JSON files.',
+    decisions: ['Vanilla JavaScript keeps the prototype lightweight', 'JSON makes product data easy to inspect and update', 'localStorage demonstrates browser persistence without a server', 'The Python prototype remains separate rather than implying an API that does not exist'],
+    challenges: ['Keeping frontend pages consistent was handled with shared product data and rendering logic.', 'Cart and authentication state are isolated in browser storage, matching the prototype scope.', 'The unfinished checkout is clearly treated as a coming-soon flow rather than a completed feature.'],
+    results: 'The project demonstrates product presentation, browser persistence, page-level interactions, and a separate command-line data model. Checkout and several prototype inconsistencies remain documented limitations.',
+    tech: ['HTML5', 'CSS3', 'Vanilla JavaScript', 'Python', 'JSON', 'localStorage', 'Font Awesome'],
+    image: storeManagementScreenshot,
+    imageAlt: 'MH Mega Mall storefront screenshot',
+    repoUrl: 'https://github.com/Hussain-Hakimi/Mh-Mega-mall',
+  },
+  {
+    slug: 'road-accident-dashboard',
+    title: 'Road Accident Data Analysis Dashboard',
+    category: 'analytics',
+    year: '2026',
+    summary: 'An Excel dashboard for exploring road-accident data through KPIs, charts, pivots, slicers, and timelines.',
+    description: 'The workbook organizes a large road-accident dataset into dashboard, KPI, trend, road-type, road-condition, daylight, and raw-data views.',
+    role: 'The repository attributes commits to Hussain Hakimi, but does not independently verify specific personal contributions to the workbook or dashboard design.',
+    problem: 'The documented challenge was making approximately 307,974 accident records easier to analyze across severity, casualties, trends, environmental conditions, and road types.',
+    solution: 'An Excel Binary Workbook uses charts, pivot tables, slicers, and timeline controls to provide aggregated views of the accident records.',
+    keyFeatures: ['KPI summary views', 'Monthly trend analysis', 'Road type and condition breakdowns', 'Daylight analysis', 'Pivot tables, slicers, and timelines', 'Raw dataset included in the workbook'],
+    implementation: 'The .xlsb workbook contains the dashboard and raw data areas, with spreadsheet-native aggregation and interactive filtering rather than a separate source-code application.',
+    decisions: ['Excel matches the spreadsheet-based analysis format', 'Pivot tables provide reusable aggregation', 'Slicers and timelines make category and period filtering accessible', 'The verified .xlsb format is used even though the README names .xlsx'],
+    challenges: ['Large raw data was organized into focused dashboard views.', 'Many analytical dimensions were made explorable through pivot-driven charts and controls.', 'Format ambiguity was resolved by documenting the repository’s actual .xlsb workbook.'],
+    results: 'The project provides a structured workbook for exploring accident patterns. No hosted interactive dashboard, automated tests, or programmatic analytics scripts were provided.',
+    tech: ['Microsoft Excel', 'Excel Binary Workbook (.xlsb)', 'Pivot Tables', 'Charts', 'Slicers', 'Timeline Controls'],
+    image: dashboardScreenshot,
+    imageAlt: 'Road accident analysis dashboard screenshot',
+    repoUrl: 'https://github.com/Hussain-Hakimi/Road_Accident-Dashboard',
+  },
+  {
+    slug: 'hussain-portfolio-website',
+    title: 'Hussain Hakimi Portfolio Website (Original)',
+    category: 'frontend',
+    year: '2026',
+    summary: 'A React and TypeScript single-page portfolio with project case studies and responsive navigation.',
+    description: 'This earlier portfolio repository presents selected projects, personal background, skills, education, experience, contact details, and project case-study views.',
+    role: 'The commit history is attributed to Hussain Hakimi, but the repository does not separately verify individual responsibilities.',
+    problem: 'The project needed a structured portfolio that could present project context, problem statements, approaches, outcomes, and technologies.',
+    solution: 'A React and TypeScript application defines structured content, renders responsive sections and case-study views, and includes navigation, SEO metadata, robots configuration, and a sitemap.',
+    keyFeatures: ['Project case-study views', 'Responsive sections and navigation', 'Skills, education, experience, and contact content', 'Skip-link navigation', 'Reduced-motion styling', 'SEO metadata, robots, and sitemap'],
+    implementation: 'The application renders route-aware content from structured data and uses React components for the main sections. The repository includes Vercel-oriented deployment metadata.',
+    decisions: ['React and TypeScript provide typed component composition', 'Structured content supports consistent project presentation', 'Responsive navigation improves mobile access', 'SEO files support public discoverability'],
+    challenges: ['Portfolio content was organized into reusable sections.', 'Case-study information was presented consistently across projects.', 'Accessibility and discoverability were supported with skip links, reduced motion, metadata, robots, and sitemap files.'],
+    results: 'The repository demonstrates a deployable frontend portfolio structure. The supplied accuracy notes identify missing referenced assets and an unresolved CSS side-effect TypeScript build issue in that original repository.',
+    tech: ['React', 'TypeScript', 'Vite', 'CSS', 'Google Fonts', 'GitHub Actions'],
+    image: placeholder('Hussain Hakimi Portfolio Website'),
+    imageAlt: 'Original portfolio website preview placeholder',
+    liveUrl: 'https://hussain-portfolio-website.vercel.app/',
+    repoUrl: 'https://github.com/Hussain-Hakimi/hussain-portfolio-website',
+  },
+];

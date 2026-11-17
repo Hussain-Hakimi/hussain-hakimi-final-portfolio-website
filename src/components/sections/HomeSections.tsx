@@ -69,7 +69,7 @@ function ProjectModal({ project, onClose }: { project: typeof projects[0]; onClo
           <div className="modal-section"><div className="modal-section-title">Category & Year</div><div className="modal-section-content">{project.category.charAt(0).toUpperCase() + project.category.slice(1)} · {project.year}</div></div>
           <div className="modal-section"><div className="modal-section-title">Overview</div><div className="modal-section-content">{project.description}</div></div>
           <div className="modal-section"><div className="modal-section-title">My Role</div><div className="modal-section-content">{project.role}</div></div>
-          <div className="modal-section"><div className="modal-section-title">Challenge & Solution</div><div className="modal-section-content"><strong>Challenge:</strong> {project.challenge}<br /><br /><strong>Solution:</strong> {project.solution}</div></div>
+          <div className="modal-section"><div className="modal-section-title">Challenge & Solution</div><div className="modal-section-content"><strong>Challenge:</strong> {project.problem}<br /><br /><strong>Solution:</strong> {project.solution}</div></div>
           <div className="modal-section"><div className="modal-section-title">Tech Stack</div><div className="modal-tags">{project.tech.map(t => <span key={t} className="tag">{t}</span>)}</div></div>
           <div className="modal-links">
             {project.liveUrl && <a href={project.liveUrl} className="btn btn-primary btn-sm" target="_blank" rel="noopener noreferrer">Live Demo →</a>}
