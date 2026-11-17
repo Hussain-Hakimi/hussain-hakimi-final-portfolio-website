@@ -278,6 +278,9 @@ export const learningCourses: LearningCourse[] = [
   },
 ];
 
+/** Compatibility type for the original resource-card component. */
+export type LearningResource = LegacyLearningResource;
+
 export interface LegacyLearningResource {
   slug: string;
   courseSlug: string;
