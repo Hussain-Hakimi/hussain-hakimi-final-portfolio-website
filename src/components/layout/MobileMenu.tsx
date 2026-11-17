@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { ArrowUpRight, Github, Linkedin, Mail, X } from 'lucide-react';
 import { Link, NavLink } from 'react-router-dom';
 import { navigation, siteConfig } from '../../data';
+import SocialLinks from '../social/SocialLinks';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -51,51 +52,23 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   }, [isOpen, onClose]);
 
   const menu = (
-    <div className={`mobile-navigation ${isOpen ? 'is-open' : ''}`} aria-hidden={!isOpen}>
-      <button
-        className="mobile-navigation-backdrop"
-        aria-label="Close navigation"
-        tabIndex={isOpen ? 0 : -1}
-        onClick={onClose}
-      />
+    <div className={'mobile-navigation ' + (isOpen ? 'is-open' : '')} aria-hidden={!isOpen}>
+      <button className="mobile-navigation-backdrop" aria-label="Close navigation" tabIndex={isOpen ? 0 : -1} onClick={onClose} />
 
-      <aside
-        ref={panel}
-        id="mobile-navigation-dialog"
-        className="mobile-navigation-panel"
-        aria-label="Mobile navigation"
-        aria-modal="true"
-        role="dialog"
-      >
+      <aside ref={panel} id="mobile-navigation-dialog" className="mobile-navigation-panel" aria-label="Mobile navigation" aria-modal="true" role="dialog">
         <div className="mobile-navigation-header">
-          <Link to="/" onClick={onClose} className="mobile-navigation-brand">
-            H<span>.</span>Hakimi
-          </Link>
-          <button
-            ref={closeButton}
-            className="mobile-navigation-close"
-            onClick={onClose}
-            tabIndex={isOpen ? 0 : -1}
-            aria-label="Close navigation"
-          >
+          <Link to="/" onClick={onClose} className="mobile-navigation-brand">H<span>.</span>Hakimi</Link>
+          <button ref={closeButton} className="mobile-navigation-close" onClick={onClose} tabIndex={isOpen ? 0 : -1} aria-label="Close navigation">
             <X size={20} />
           </button>
         </div>
 
-        <div className="mobile-navigation-heading">
-          <span>Navigation</span>
-          <span>Menu / 2026</span>
-        </div>
+        <div className="mobile-navigation-heading"><span>Navigation</span><span>Menu / 2026</span></div>
 
         <nav className="mobile-navigation-links" aria-label="Mobile primary navigation">
           {navigation.map((item, index) => (
-            <NavLink
-              key={item.path}
-              to={item.path}
-              onClick={onClose}
-              tabIndex={isOpen ? 0 : -1}
-              className={({ isActive }) => `mobile-navigation-link ${isActive ? 'active' : ''}`}
-            >
+            <NavLink key={item.path} to={item.path} onClick={onClose} tabIndex={isOpen ? 0 : -1}
+              className={({ isActive }) => 'mobile-navigation-link ' + (isActive ? 'active' : '')}>
               <span className="mobile-navigation-index">0{index + 1}</span>
               <span className="mobile-navigation-label">{item.label}</span>
               <ArrowUpRight className="mobile-navigation-arrow" size={19} aria-hidden="true" />
@@ -106,17 +79,10 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         <div className="mobile-navigation-footer">
           <span className="mobile-navigation-footer-label">Connect</span>
           <div className="mobile-navigation-socials">
-            <a href={siteConfig.github} target="_blank" rel="noopener noreferrer" tabIndex={isOpen ? 0 : -1} aria-label="GitHub">
-              <Github size={17} />
-            </a>
-            <a href={siteConfig.linkedin} target="_blank" rel="noopener noreferrer" tabIndex={isOpen ? 0 : -1} aria-label="LinkedIn">
-              <Linkedin size={17} />
-            </a>
-            {siteConfig.email && (
-              <a href={`mailto:${siteConfig.email}`} tabIndex={isOpen ? 0 : -1} aria-label="Email">
-                <Mail size={17} />
-              </a>
-            )}
+            <a href={siteConfig.github} target="_blank" rel="noopener noreferrer" tabIndex={isOpen ? 0 : -1} aria-label="GitHub"><Github size={17} /></a>
+            <a href={siteConfig.linkedin} target="_blank" rel="noopener noreferrer" tabIndex={isOpen ? 0 : -1} aria-label="LinkedIn"><Linkedin size={17} /></a>
+            <SocialLinks variant="icons" className="mobile-navigation-social-channels" tabIndex={isOpen ? 0 : -1} />
+            {siteConfig.email && <a href={'mailto:' + siteConfig.email} tabIndex={isOpen ? 0 : -1} aria-label="Email"><Mail size={17} /></a>}
           </div>
         </div>
       </aside>

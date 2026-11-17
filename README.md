@@ -28,6 +28,19 @@ The repository also includes a GitHub Actions workflow that runs these checks on
 - `src/hooks/` — reusable React hooks
 - `public/` — static files such as the sitemap, RSS feed, certificates, and resume
 
+## Learning library
+
+The Resources section is data-driven. Add or edit courses, chapters, and lessons in `src/data/resources.ts`.
+
+- A course is rendered at `/resources/:courseSlug`.
+- A lesson is rendered at `/resources/:courseSlug/:lessonSlug`.
+- Set a lesson's status to `published` only when its materials are ready.
+- Add real `videoUrl`, `notesUrl`, and `codeUrl` values to expose the corresponding lesson actions.
+- The legacy lesson URLs are retained through redirects in the course route component.
+- Update `public/sitemap.xml` when adding or removing course and lesson routes.
+
+Social profile URLs are centralized in `src/data/site.ts`, so shared social links stay consistent across the footer, mobile navigation, and learning pages.
+
 ## Environment variables
 
 Copy `.env.example` to `.env.local` and configure the public Vite values required by your deployment:

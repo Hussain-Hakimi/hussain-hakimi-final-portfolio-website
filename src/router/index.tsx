@@ -8,7 +8,8 @@ import ProjectDetail from '../pages/ProjectDetail';
 import Blog from '../pages/Blog';
 import BlogPost from '../pages/BlogPost';
 import Resources from '../pages/Resources';
-import ResourceDetail from '../pages/ResourceDetail';
+import ResourceCourseDetail from '../pages/ResourceCourseDetail';
+import ResourceLessonDetail from '../pages/ResourceLessonDetail';
 import Certifications from '../pages/Certifications';
 import Contact from '../pages/Contact';
 import NotFound from '../pages/NotFound';
@@ -26,7 +27,8 @@ export default function AppRouter() {
           <Route path="blog" element={<Blog />} />
           <Route path="blog/:slug" element={<BlogPost />} />
           <Route path="resources" element={<Resources />} />
-          <Route path="resources/:slug" element={<ResourceDetail />} />
+          <Route path="resources/:courseSlug/:lessonSlug" element={<ResourceLessonDetail />} />
+          <Route path="resources/:courseSlug" element={<ResourceCourseDetail />} />
           <Route path="certifications" element={<Certifications />} />
           <Route path="contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />

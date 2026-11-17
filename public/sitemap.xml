@@ -11,9 +11,27 @@
   <url><loc>https://hussainhakimidev.vercel.app/blog/understanding-big-o-notation</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://hussainhakimidev.vercel.app/blog/building-a-portfolio-with-react</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://hussainhakimidev.vercel.app/resources</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://hussainhakimidev.vercel.app/resources/csharp-classes</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://hussainhakimidev.vercel.app/resources/python-functions</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://hussainhakimidev.vercel.app/resources/sql-basics</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hussainhakimidev.vercel.app/resources/python-foundations</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hussainhakimidev.vercel.app/resources/csharp-foundations</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hussainhakimidev.vercel.app/resources/sql-fundamentals</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hussainhakimidev.vercel.app/resources/python-foundations/what-is-python</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hussainhakimidev.vercel.app/resources/python-foundations/variables-and-data-types</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hussainhakimidev.vercel.app/resources/python-foundations/conditions-and-loops</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hussainhakimidev.vercel.app/resources/python-foundations/lists-and-dictionaries</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hussainhakimidev.vercel.app/resources/python-foundations/python-functions</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hussainhakimidev.vercel.app/resources/python-foundations/file-handling</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hussainhakimidev.vercel.app/resources/csharp-foundations/csharp-introduction</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hussainhakimidev.vercel.app/resources/csharp-foundations/csharp-variables</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hussainhakimidev.vercel.app/resources/csharp-foundations/csharp-classes</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hussainhakimidev.vercel.app/resources/csharp-foundations/csharp-encapsulation</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hussainhakimidev.vercel.app/resources/csharp-foundations/csharp-inheritance</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hussainhakimidev.vercel.app/resources/csharp-foundations/csharp-polymorphism</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hussainhakimidev.vercel.app/resources/sql-fundamentals/relational-databases</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hussainhakimidev.vercel.app/resources/sql-fundamentals/sql-basics</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hussainhakimidev.vercel.app/resources/sql-fundamentals/insert-update-delete</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hussainhakimidev.vercel.app/resources/sql-fundamentals/sql-joins</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hussainhakimidev.vercel.app/resources/sql-fundamentals/normalization</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hussainhakimidev.vercel.app/resources/sql-fundamentals/constraints-and-transactions</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://hussainhakimidev.vercel.app/certifications</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://hussainhakimidev.vercel.app/contact</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
 </urlset>

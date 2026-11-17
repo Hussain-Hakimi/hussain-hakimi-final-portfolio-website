@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { siteConfig, projects, blogPosts, skills, experience, education } from '../../data';
+import SocialLinks from '../social/SocialLinks';
 
 function useTypewriter(text: string, speed = 80) {
   const [displayed, setDisplayed] = useState('');
@@ -91,7 +92,7 @@ export function HeroSection() {
         <p className="hero-subtitle">Software Engineering student at UET Lahore, passionate about frontend development, database design, and data analytics. I build beautiful, performant web experiences.</p>
         <div className="hero-ctas"><Link to="/contact" className="btn btn-primary">Get in Touch →</Link><a href={siteConfig.resume} className="btn btn-secondary" download="Hussain-Hakimi-Resume.pdf">Download Resume</a></div>
         <div className="hero-stats" role="list"><div className="hero-stat" role="listitem"><div className="hero-stat-value">3</div><div className="hero-stat-label">Featured Projects</div></div><div className="hero-stat" role="listitem"><div className="hero-stat-value">3</div><div className="hero-stat-label">Focus Areas</div></div><div className="hero-stat" role="listitem"><div className="hero-stat-value">2025–29</div><div className="hero-stat-label">Study Track</div></div></div>
-      </div><div className="hero-image-wrapper"><div><div className="hero-image-ring"><img className="hero-image" src="/images/Hussain%20Hakimi%20profle%20picture.JPG" alt="Hussain Hakimi" width="640" height="640" fetchPriority="high" /></div><div className="hero-social-links"><a href={siteConfig.github} className="social-pill" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile"><span aria-hidden="true">⚡</span> GitHub</a><a href={siteConfig.linkedin} className="social-pill" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile"><span aria-hidden="true">💼</span> LinkedIn</a><a href={siteConfig.youtube} className="social-pill" target="_blank" rel="noopener noreferrer" aria-label="YouTube channel"><span aria-hidden="true">▶️</span> YouTube</a></div></div></div></div></div>
+      </div><div className="hero-image-wrapper"><div><div className="hero-image-ring"><img className="hero-image" src="/images/Hussain%20Hakimi%20profle%20picture.JPG" alt="Hussain Hakimi" width="640" height="640" fetchPriority="high" /></div><div className="hero-social-links"><a href={siteConfig.github} className="social-pill" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile"><span aria-hidden="true">⚡</span> GitHub</a><a href={siteConfig.linkedin} className="social-pill" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile"><span aria-hidden="true">💼</span> LinkedIn</a><SocialLinks variant="pills" /></div></div></div></div></div>
     </section>
   );
 }
