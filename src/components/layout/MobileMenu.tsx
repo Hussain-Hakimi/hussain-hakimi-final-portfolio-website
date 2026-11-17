@@ -81,7 +81,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           <div className="mobile-navigation-socials">
             <a href={siteConfig.github} target="_blank" rel="noopener noreferrer" tabIndex={isOpen ? 0 : -1} aria-label="GitHub"><Github size={17} /></a>
             <a href={siteConfig.linkedin} target="_blank" rel="noopener noreferrer" tabIndex={isOpen ? 0 : -1} aria-label="LinkedIn"><Linkedin size={17} /></a>
-            <SocialLinks variant="icons" className="mobile-navigation-social-channels" />
+            <SocialLinks variant="icons" className="mobile-navigation-social-channels" tabIndex={isOpen ? 0 : -1} />
             {siteConfig.email && <a href={'mailto:' + siteConfig.email} tabIndex={isOpen ? 0 : -1} aria-label="Email"><Mail size={17} /></a>}
           </div>
         </div>
