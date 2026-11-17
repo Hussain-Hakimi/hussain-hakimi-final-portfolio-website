@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { ArrowUpRight, Facebook, Github, Instagram, Linkedin, Mail, X, Youtube } from 'lucide-react';
 import { Link, NavLink } from 'react-router-dom';
 import { navigation, siteConfig } from '../../data';
+import BrandLogo from '../BrandLogo';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -68,8 +69,8 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         role="dialog"
       >
         <div className="mobile-navigation-header">
-          <Link to="/" onClick={onClose} className="mobile-navigation-brand">
-            H<span>.</span>Hakimi
+          <Link to="/" onClick={onClose} className="mobile-navigation-brand" aria-label="Hussain Hakimi home">
+            <BrandLogo />
           </Link>
           <button
             ref={closeButton}

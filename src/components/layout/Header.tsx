@@ -5,6 +5,7 @@ import { CommandPaletteContext } from '../../context/CommandPaletteContext';
 import { navigation } from '../../data';
 import MobileMenu from './MobileMenu';
 import ThemeToggle from './ThemeToggle';
+import BrandLogo from '../BrandLogo';
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -16,7 +17,7 @@ export default function Header() {
   };
   return <header className="site-header">
     <div className="site-header-inner">
-      <Link to="/" className="site-logo" aria-label="Hussain Hakimi home">H<span>.</span>Hakimi</Link>
+      <Link to="/" className="site-logo" aria-label="Hussain Hakimi home"><BrandLogo /></Link>
       <nav className="site-nav" aria-label="Primary navigation">
         {navigation.map(item => <NavLink key={item.path} to={item.path} className={({ isActive }) => `site-nav-link ${isActive ? 'active' : ''}`}>{item.label}</NavLink>)}
       </nav>
