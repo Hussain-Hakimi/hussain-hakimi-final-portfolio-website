@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { ArrowUpRight, Github, Linkedin, Mail, X } from 'lucide-react';
+import { ArrowUpRight, Facebook, Github, Instagram, Linkedin, Mail, X, Youtube } from 'lucide-react';
 import { Link, NavLink } from 'react-router-dom';
 import { navigation, siteConfig } from '../../data';
 
@@ -111,6 +111,15 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             </a>
             <a href={siteConfig.linkedin} target="_blank" rel="noopener noreferrer" tabIndex={isOpen ? 0 : -1} aria-label="LinkedIn">
               <Linkedin size={17} />
+            </a>
+            <a href={siteConfig.youtube} target="_blank" rel="noopener noreferrer" tabIndex={isOpen ? 0 : -1} aria-label="YouTube">
+              <Youtube size={17} />
+            </a>
+            <a href={siteConfig.instagram} target="_blank" rel="noopener noreferrer" tabIndex={isOpen ? 0 : -1} aria-label="Instagram">
+              <Instagram size={17} />
+            </a>
+            <a href={siteConfig.facebook} target="_blank" rel="noopener noreferrer" tabIndex={isOpen ? 0 : -1} aria-label="Facebook">
+              <Facebook size={17} />
             </a>
             {siteConfig.email && (
               <a href={`mailto:${siteConfig.email}`} tabIndex={isOpen ? 0 : -1} aria-label="Email">

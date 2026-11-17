@@ -7,5 +7,7 @@ export interface SiteConfig {
   github: string;
   linkedin: string;
   youtube: string;
+  instagram: string;
+  facebook: string;
   resume: string;
 }

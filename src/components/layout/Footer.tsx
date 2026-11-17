@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail, Youtube } from 'lucide-react';
+import { Facebook, Github, Instagram, Linkedin, Mail, Youtube } from 'lucide-react';
 import { siteConfig } from '../../data';
 
 export default function Footer() {
@@ -8,6 +8,8 @@ export default function Footer() {
       <a href={siteConfig.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub"><Github size={18} /></a>
       <a href={siteConfig.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Linkedin size={18} /></a>
       <a href={siteConfig.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube"><Youtube size={18} /></a>
+      <a href={siteConfig.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram"><Instagram size={18} /></a>
+      <a href={siteConfig.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook"><Facebook size={18} /></a>
       {siteConfig.email && <a href={`mailto:${siteConfig.email}`} aria-label="Email"><Mail size={18} /></a>}
     </div>
   </div></footer>;

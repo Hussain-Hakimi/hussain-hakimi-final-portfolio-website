@@ -71,6 +71,8 @@ export default function About() {
                     <a href={siteConfig.github} className="social-pill" target="_blank" rel="noopener noreferrer" style={{ justifyContent: 'center' }}><span aria-hidden="true">⚡</span> GitHub</a>
                     <a href={siteConfig.linkedin} className="social-pill" target="_blank" rel="noopener noreferrer" style={{ justifyContent: 'center' }}><span aria-hidden="true">💼</span> LinkedIn</a>
                     <a href={siteConfig.youtube} className="social-pill" target="_blank" rel="noopener noreferrer" style={{ justifyContent: 'center' }}><span aria-hidden="true">▶️</span> YouTube</a>
+                    <a href={siteConfig.instagram} className="social-pill" target="_blank" rel="noopener noreferrer" style={{ justifyContent: 'center' }}><span aria-hidden="true">◎</span> Instagram</a>
+                    <a href={siteConfig.facebook} className="social-pill" target="_blank" rel="noopener noreferrer" style={{ justifyContent: 'center' }}><span aria-hidden="true">f</span> Facebook</a>
                     {siteConfig.email && <a href={`mailto:${siteConfig.email}`} className="social-pill" style={{ justifyContent: 'center' }}><span aria-hidden="true">✉️</span> Email</a>}
                     <a href={siteConfig.resume} className="social-pill" download="Hussain-Hakimi-Resume.pdf" style={{ justifyContent: 'center' }}><span aria-hidden="true">↓</span> Download Resume</a>
                   </div>

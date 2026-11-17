@@ -113,6 +113,8 @@ export default function Contact() {
                   <a href={siteConfig.github} className="social-pill" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">⚡</span> GitHub</a>
                   <a href={siteConfig.linkedin} className="social-pill" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">💼</span> LinkedIn</a>
                   <a href={siteConfig.youtube} className="social-pill" target="_blank" rel="noopener noreferrer" aria-label="YouTube channel"><span aria-hidden="true">▶️</span> YouTube</a>
+                  <a href={siteConfig.instagram} className="social-pill" target="_blank" rel="noopener noreferrer" aria-label="Instagram profile"><span aria-hidden="true">◎</span> Instagram</a>
+                  <a href={siteConfig.facebook} className="social-pill" target="_blank" rel="noopener noreferrer" aria-label="Facebook profile"><span aria-hidden="true">f</span> Facebook</a>
                   {siteConfig.email && <a href={`mailto:${siteConfig.email}`} className="social-pill"><span aria-hidden="true">✉️</span> {siteConfig.email}</a>}
                 </div>
               </div>
