@@ -4,10 +4,11 @@ import { siteConfig } from '../../data';
 interface SocialLinksProps {
   variant?: 'icons' | 'pills';
   className?: string;
+  tabIndex?: number;
 }
 
 /** Shared links keep social destinations consistent across the portfolio. */
-export default function SocialLinks({ variant = 'icons', className = '' }: SocialLinksProps) {
+export default function SocialLinks({ variant = 'icons', className = '', tabIndex }: SocialLinksProps) {
   const links = [
     { label: 'YouTube', href: siteConfig.youtube, Icon: Youtube },
     { label: 'Instagram', href: siteConfig.instagram, Icon: Instagram },
@@ -15,9 +16,9 @@ export default function SocialLinks({ variant = 'icons', className = '' }: Socia
   ];
 
   return (
-    <div className={['social-links', `social-links-${variant}`, className].filter(Boolean).join(' ')}>
+    <div className={['social-links', 'social-links-' + variant, className].filter(Boolean).join(' ')}>
       {links.map(({ label, href, Icon }) => (
-        <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}>
+        <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} tabIndex={tabIndex}>
           <Icon size={variant === 'icons' ? 18 : 17} aria-hidden="true" />
           {variant === 'pills' && <span>{label}</span>}
         </a>
